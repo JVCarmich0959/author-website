@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title><%= title %> | Bloodborne Chronicles</title>
+<link href="/css/tailwind.css" rel="stylesheet">
+</head><body class="font-serif bg-gray-950 text-gray-100">
+<header class="container mx-auto py-6 flex justify-between">
+  <a href="/" class="text-3xl font-black tracking-wide">Bloodborne Chronicles</a>
+  <nav class="space-x-6">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>
+
+<main class="container mx-auto px-4">
+  <%- body %>            <!-- ejs-mate injects your page here -->
+</main>
+
+<footer class="text-center mt-16 py-8 text-sm text-gray-400">
+  © <%= new Date().getFullYear() %> Melissa Michaels
+</footer>
+</body></html>
