@@ -1,0 +1,302 @@
+/* hero.css — Urban Fantasy Author: Dark Gothic Edition */
+
+:root {
+  /* color palette */
+  --color-black: #010800;
+  --color-burgundy: #1B0C00;
+  --color-chocolate: #351304;
+  --color-russet: #8C5431;
+  --color-blood-red: #B9211D;
+  --color-antique-gold: #CDB48B;
+}
+
+.hero {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-antique-gold);
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    var(--color-black) 0%,
+    var(--color-burgundy) 80%,
+    var(--color-black) 100%
+  );
+}
+
+.hSection {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+.hSection.left { align-items: flex-start; }
+.hSection.right { align-items: flex-end; }
+
+/* MAIN TITLE */
+.hTitle {
+  margin-top: 3rem;
+  font-size: 4rem;
+  line-height: 1.1;
+  color: var(--color-blood-red);
+  text-shadow:
+    4px 4px 8px rgba(0,0,0,0.8),
+   -2px -2px 4px rgba(27,12,0,0.5);
+}
+.hTitle span {
+  color: var(--color-antique-gold);
+  font-style: italic;
+}
+
+/* LITTLE GOTHIC PLAQUE */
+.awards {
+  width: 30%;
+  background: rgba(27,12,0,0.6);
+  padding: 1rem;
+  border: 2px solid var(--color-blood-red);
+  border-radius: 4px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+}
+.awards h2 {
+  color: var(--color-antique-gold);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.awards p {
+  color: var(--color-chocolate);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.awardList {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.awardList img {
+  width: 32px;
+  height: 32px;
+  padding: 0.25rem;
+  background: var(--color-antique-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+
+/* SCROLL HINT */
+.scroll {
+  margin-bottom: 2rem;
+}
+.scroll svg path {
+  stroke: var(--color-antique-gold);
+}
+
+/* SOCIAL PANEL */
+.follow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(27,12,0,0.8);
+  border-left: 4px solid var(--color-russet);
+}
+.follow img {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(100%) brightness(1.2);
+}
+
+/* REMOVED bubble (optional) */
+
+/* SIGNED CTA */
+.certificate {
+  background: rgba(27,12,0,0.6);
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-blood-red);
+  border-radius: 6px;
+  color: var(--color-antique-gold);
+  font-weight: 300;
+  text-align: center;
+  line-height: 1.2;
+  box-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
+
+/* NEWSLETTER BUTTON */
+.contactLink {
+  margin-bottom: 2rem;
+}
+.contactButton {
+  position: relative;
+  display: inline-block;
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+.circleText {
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  fill: var(--color-chocolate);
+}
+.arrow svg {
+  stroke: var(--color-chocolate);
+}
+
+/* COVER IMAGE */
+.hImg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 90%;
+  width: auto;
+}
+.hImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+
+/* Responsive tweaks */
+@media (max-width: 1280px) {
+  .hTitle { font-size: 3rem; }
+  .awards  { width: 50%; }
+}
+
+@media (max-width: 1024px) {
+  .hero       { flex-direction: column; }
+  .hSection   { width: 100%; align-items: center; text-align: center; }
+  .follow, .certificate { display: none; }
+  .awards     { width: 80%; }
+}
+
+/* Top nav */
+
+/** Basic understanding of CSS elements::after
+ * 1. The selector (e.g., .nav) targets the HTML element with the class "nav" (or any other specified selector).
+ * 2. The properties (e.g., position, top, left) define the location and appearance of the element on the HTML page.
+ * 3. The values (e.g., fixed, 0, 2rem) specify the exact behavior or style of the properties.
+ * 4. DON'T FORGET THE SEMICOLON AT THE END OF EACH LINE!
+ * 5. The curly braces {} group the properties and values together for that specific style selector.
+ * 6. The CSS file is linked to the HTML file, allowing the styles to be applied to the elements in the HTML document.
+ * 7. The CSS file can be external, internal, or inline, but external is the most common for larger projects.
+ * 8. Comments in CSS can help document the purpose and usage of styles for better maintainability.
+ */
+
+.nav {
+  position: fixed; /* the fixed position argument makes the nav stick to the top */
+  top: 0; /* arguments like 'top', 'left' , 'right ' tell the  page where to position the element */
+  left: 0; 
+  right: 0;
+  padding: 1rem 2rem; /* the 'padding' argument tells the page how much space to leave around an element */
+  display: flex; /* the 'display' argument with the value 'flex'  makes the element a flex container */
+  /* a flex container is a box that can hold other boxes >*< oowoo */
+  align-items: center; /* the 'align-items' argument tells the page how to align the items in the flex container */
+  /* the value 'center' tells the page to center the items vertically */
+  justify-content: space-between; /* the 'justify-content' argument tells the page how to distribute space between items within 
+  the flex container */
+  background: rgba(1, 8, 0, 0.85); /* the 'background' argument tells the page what color to make the background of the element */
+  z-index: 100; /* The z-index ensures the nav is above other elements */
+}
+
+.nav_logo {
+  font-family: "Cinzel Decorative", serif; /* the 'font-family' argument tells the page what font to use for the text */
+  color: var(--color-antique-gold); /* the 'color' argument tells the page what color to make the text */
+  cursor: pointer; /* the 'cursor' argument tells the page what cursor to show when hovering over the element */
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__links li {
+  cursor: pointer;
+  color: var(--color-antique-gold);
+  transition: color 0.2s;
+}
+
+/* hamburger */
+.nav_toggle {
+  display: none; /* the 'display argument with the value 'none' hides the element */
+  flex-direction: column; /* the 'flex-direction' argument with the value 'column' makes the element a flex container with a column layout */
+  gap: 4px; /* the 'gap' argument tells the page how much space to leave between the items in the flex container */
+  cursor: pointer; /* the 'cursor' argument tells the page what cursor to show when hovering over the element */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav_toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-antique-gold);
+  transition: transform 0.3s;
+}
+
+.nav_toggle--open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav_toggle--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav_toggle--open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* mobile */
+
+@media (max-width: 768px) {
+  .nav__links {
+    position: absolute;
+    top: 0;
+    background: var(--color-black);
+    flex-direction: column;
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+  }
+  .nav__links--open {
+    transform: translateX(0);
+}
+.nav_toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  background: var(--color-black);
+  border-radius: 5px;
+
+  }
+}
+
+/* back-to-top arrow */
+.to-top{
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(27,12);
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.to-top svg {
+  display: block;
+}
+
+/* make sure Hero sits below nav bar */
+.hero{
+  padding-top: 4rem;
+}

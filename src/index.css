@@ -1,0 +1,93 @@
+/* index.css — Global Gothic Theme */
+
+:root {
+  /* pull in the same palette for global use */
+  --color-black: #010800;
+  --color-burgundy: #1B0C00;
+  --color-chocolate: #351304;
+  --color-russet: #8C5431;
+  --color-blood-red: #B9211D;
+  --color-antique-gold: #CDB48B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* smooth full-page scroll on sections */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: var(--color-black);
+  color: var(--color-antique-gold);
+  font-family: "Cinzel Decorative", serif;
+}
+
+body {
+  /* subtle burgundy → black fade */
+  background: linear-gradient(
+    180deg,
+    var(--color-black) 0%,
+    var(--color-burgundy) 60%,
+    var(--color-black) 100%
+  );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* anchor tags in antique gold with slight glow */
+a {
+  color: var(--color-antique-gold);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover,
+a:focus {
+  color: var(--color-blood-red);
+  text-shadow: 0 0 6px rgba(185,33,29,0.7);
+}
+
+/* content container centering */
+.container {
+  max-width: 1536px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* each <section> fills viewport & snaps */
+section {
+  height: 100vh;
+  scroll-snap-align: center;
+}
+
+/* headings get a heavier gothic heft */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-blood-red);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* paragraphs and lists in softer antique gold */
+p, li {
+  color: var(--color-antique-gold);
+  line-height: 1.6;
+}
+
+/* responsive container widths */
+@media (min-width: 640px) {
+  .container { max-width: 640px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 768px; }
+}
+@media (min-width: 1024px) {
+  .container { max-width: 1024px; }
+}
+@media (min-width: 1280px) {
+  .container { max-width: 1280px; }
+}
+@media (min-width: 1536px) {
+  .container { max-width: 1536px; }
+}

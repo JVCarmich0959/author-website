@@ -1,0 +1,91 @@
+/* src/components/About/about.css */
+
+.about {
+  background: linear-gradient(to bottom, #12071f, #2f204e);
+  padding: 80px 4%;
+  color: #ddd;
+  min-height: 100vh;
+}
+
+.aboutTitle {
+  position: relative;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "Gothic Serif", serif;
+  color: #dd4c62;
+}
+
+.aboutContent{
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.aboutContent a {
+  color: #dd4c62;
+  text-decoration: underline;
+}
+
+.subscribeForm{
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(255,255,255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.subscribeForm h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.subscribeForm form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subscribeForm button {
+  background: #dd4c62;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.subText {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .aboutTitle { font-size: 2.5rem; }
+  .subscribeForm { padding: 1.5rem; }
+}
+
+.about_progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--color-antique-gold);
+  transform-origin: left center;
+  width: 100%;
+  scale-x: 0;
+  transition: scale-x 0.3s ease;
+}
+
+.aboutTitle_underline {
+  display: block;
+  height: 4px;
+  background: var(--color-blood-red);
+  margin-top: 0.5rem;
+  width: 0;
+}
