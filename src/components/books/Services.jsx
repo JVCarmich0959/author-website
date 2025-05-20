@@ -1,6 +1,7 @@
 // src/components/books/Services.jsx
 import { motion, useInView } from "motion/react";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import BookModelContainer from "./computer/BookModelContainer";
 import "./services.css";
 
@@ -104,9 +105,9 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             <BookModelContainer />
-            <a href={services[0].link} className="detailLink">
+            <Link to={services[0].link} className="detailLink">
               {services[0].linkText}
-            </a>
+            </Link>
           </motion.div>
         )}
 
