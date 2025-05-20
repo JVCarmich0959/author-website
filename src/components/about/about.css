@@ -32,6 +32,19 @@
   text-decoration: underline;
 }
 
+.headshot {
+  display: block;
+  width: 200px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.aboutBlurb {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
 .subscribeForm{
   max-width: 400px;
   margin: 0 auto;
