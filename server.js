@@ -16,4 +16,8 @@ app.set("views", path.join(__dirname, "src", "views"));
 app.get("/",      (_req, res) => res.render("index", { title: "Home"  }));
 app.get("/about", (_req, res) => res.render("about", { title: "About" }));
 
-app.listen(PORT, () => console.log(`🚀  http://localhost:${PORT}`));
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => console.log(`🚀  http://localhost:${PORT}`));
+}
+
+export { app };
