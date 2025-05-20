@@ -22,7 +22,11 @@
 .bg {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  /*
+   * Place the background layer behind hero content but
+   * above the page background so the image remains visible.
+   */
+  z-index: 0;
   background: linear-gradient(
     180deg,
     var(--color-black) 0%,
