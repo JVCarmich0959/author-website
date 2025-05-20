@@ -3,8 +3,9 @@ import LazyLoad from "react-lazyload";
 
 const Hero      = lazy(() => import("./components/hero/Hero"));
 const Services  = lazy(() => import("./components/books/Services"));
-const About     = lazy(() => import("./components/about/About"));
-const Newsletter= lazy(() => import("./components/newsletter/Newsletter"));
+const About      = lazy(() => import("./components/about/About"));
+const VideoGallery = lazy(() => import("./components/video/VideoGallery"));
+const Newsletter = lazy(() => import("./components/newsletter/Newsletter"));
 
 const App = () => (
   <div className="container">
@@ -37,6 +38,13 @@ const App = () => (
             ]}
             blurb="More stories and updates coming soon."
           />
+        </section>
+      </LazyLoad>
+    </Suspense>
+    <Suspense fallback={null}>
+      <LazyLoad height="100vh" offset={-100}>
+        <section id="videos">
+          <VideoGallery />
         </section>
       </LazyLoad>
     </Suspense>

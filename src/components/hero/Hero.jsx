@@ -33,7 +33,7 @@ export default function Hero() {
             <motion.a
             href="#about"
             className="scroll"
-            animate={{ y: [0, 5], opacity : [0, 1, 0] }}
+            animate={{ y: [0, 5], opacity: [0, 1, 0] }}
             transition={{
               repeat: Infinity,
               duration: 4,

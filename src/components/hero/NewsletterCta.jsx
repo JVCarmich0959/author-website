@@ -25,8 +25,12 @@ export default function NewsletterCta({ href = "#contact" }) {
             animate="animate"
             className="contactLink"
         >
-          < motion.div className="contactButton" variants={spin}>
+          <motion.div className="contactButton" variants={spin}>
+ codex/update-documentation-and-fix-code-issues
+          <svg viewBox="0 0 200 200" width="150" height="150">
+
           <svg viewBox=" 0 0 200 200" width="150" height="150">
+ main
             <circle cx="100" cy="100" r="90" fill="#d23d3d" />
             <path
                 id="innerCirclePath"
@@ -35,13 +39,13 @@ export default function NewsletterCta({ href = "#contact" }) {
             />
             <text className="circleText">
                 <textPath href="#innerCirclePath">
-                    JOIN THE NEWSLETTER
+                    JOIN THE BLOODBORNE BULLETIN
                 </textPath>
             </text>
           </svg>
           <div className="arrow">
             <svg
-                xmlns="http://www.w3org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="50"
                 height="50"
@@ -50,7 +54,7 @@ export default function NewsletterCta({ href = "#contact" }) {
                 strokeWidth="2"
                 >
                     <line x1="6" y1="18" x2="18" y2="6" />
-                    <polyline points= "9 6 18 6 18 15" />
+                    <polyline points="9 6 18 6 18 15" />
                 </svg>
           </div>
           </motion.div>
