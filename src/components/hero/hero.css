@@ -156,6 +156,8 @@
   transform: translateX(-50%);
   height: 90%;
   width: auto;
+  /* ensure the cover displays above the 3D canvas */
+  z-index: 1;
 }
 .hImg img {
   width: 100%;
