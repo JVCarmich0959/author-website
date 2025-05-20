@@ -26,7 +26,11 @@ export default function NewsletterCta({ href = "#contact" }) {
             className="contactLink"
         >
           <motion.div className="contactButton" variants={spin}>
+ codex/update-documentation-and-fix-code-issues
           <svg viewBox="0 0 200 200" width="150" height="150">
+
+          <svg viewBox=" 0 0 200 200" width="150" height="150">
+ main
             <circle cx="100" cy="100" r="90" fill="#d23d3d" />
             <path
                 id="innerCirclePath"

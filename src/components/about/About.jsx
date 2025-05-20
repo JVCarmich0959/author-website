@@ -85,7 +85,7 @@ return (
               method="POST"
               target="_blank"
               >
-                < input
+                <input
                   type="email"
                   name="email"
                   placeholder="Enter your email"
