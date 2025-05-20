@@ -1,4 +1,4 @@
-import "./contact.css";
+import "./newsletter.css";
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
