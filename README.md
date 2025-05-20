@@ -1,21 +1,18 @@
 # Urban Fantasy Author Website
 
-This project powers the online presence of **Melissa Michaels**, author of *Raven's Revenge* and the growing **Bloodborne Chronicles** series. It combines a React front end with an Express server to showcase her books, share author updates and collect newsletter sign‑ups.
+This project powers the online presence of **Melissa Michaels**, author of *Raven's Revenge* and the growing **Bloodborne Chronicles** series. It is a Vite powered React front end that showcases her books, shares author updates and collects newsletter sign‑ups.
 
 ## Key Technologies
 
 - **React + Vite** – component‑driven UI with hot module reloading
-- **Express & EJS** – lightweight server and templating for pages
 - **Tailwind CSS** – utility‑first styling
 - **React Three Fiber** – 3D book and merchandise models
 - **EmailJS** – sends contact and newsletter forms
 
 ## Project Structure
 
-- `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
-- `src/views` – EJS templates rendered by Express
+- `src/components` – React components for the hero, about section, services and newsletter form
 - `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
-- `server.js` – Express configuration used for server‑side rendering and static file hosting
 
 ## Getting Started
 
@@ -28,14 +25,24 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    npm run dev
    ```
    This launches the React front end with hot reload.
-3. (Optional) run the Express server for the EJS pages
-   ```bash
-   node server.js
-   ```
-4. Build production assets
+3. Build production assets
    ```bash
    npm run build
    ```
+4. Run tests
+   ```bash
+   npm test
+   ```
+
+## Environment Variables
+
+Create a `.env` file based on `.env.example` and fill in your EmailJS credentials:
+
+```
+VITE_SERVICE_ID=your_service_id
+VITE_TEMPLATE_ID=your_template_id
+VITE_PUBLIC_KEY=your_public_key
+```
 
 ## Features
 

@@ -217,7 +217,7 @@
   right: 0;
   padding: 1rem 2rem; /* the 'padding' argument tells the page how much space to leave around an element */
   display: flex; /* the 'display' argument with the value 'flex'  makes the element a flex container */
-  /* a flex container is a box that can hold other boxes >*< oowoo */
+  /* a flex container is a box that can hold other elements */
   align-items: center; /* the 'align-items' argument tells the page how to align the items in the flex container */
   /* the value 'center' tells the page to center the items vertically */
   justify-content: space-between; /* the 'justify-content' argument tells the page how to distribute space between items within 
