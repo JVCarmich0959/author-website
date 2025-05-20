@@ -25,7 +25,7 @@ export default function NewsletterCta({ href = "#contact" }) {
             animate="animate"
             className="contactLink"
         >
-          < motion.div className="contactButton" variants={spin}>
+          <motion.div className="contactButton" variants={spin}>
           <svg viewBox=" 0 0 200 200" width="150" height="150">
             <circle cx="100" cy="100" r="90" fill="#d23d3d" />
             <path
@@ -41,7 +41,7 @@ export default function NewsletterCta({ href = "#contact" }) {
           </svg>
           <div className="arrow">
             <svg
-                xmlns="http://www.w3org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="50"
                 height="50"
