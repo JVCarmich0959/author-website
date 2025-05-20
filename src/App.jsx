@@ -28,7 +28,15 @@ const App = () => (
     <Suspense fallback={null}>
       <LazyLoad height="600vh" offset={-100}>
         <section id="about">
-          <About />
+          <About
+            headshot="/p1.jpg"
+            bio={[
+              'Melissa Michaels is an author, reader, and aspiring novelist. Her love of writing grew out of her passion for reading, her tastes leaning towards Urban Fantasy.',
+              'She is the author of <i>Ravens Transformation</i>, an Urban Fantasy short story featured in Abaculus III, a collection of international tales of science fiction, fantasy, and horror.',
+              'Melissa is a proud member of the North Carolina Writers Network'
+            ]}
+            blurb="More stories and updates coming soon."
+          />
         </section>
       </LazyLoad>
     </Suspense>
