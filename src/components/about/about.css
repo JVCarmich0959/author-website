@@ -1,9 +1,13 @@
 /* src/components/About/about.css */
 
 .about {
-  background: linear-gradient(to bottom, #12071f, #2f204e);
+  background: linear-gradient(
+    to bottom,
+    var(--color-black),
+    var(--color-burgundy)
+  );
   padding: 80px 4%;
-  color: #ddd;
+  color: var(--color-antique-gold);
   min-height: 100vh;
 }
 
@@ -13,7 +17,7 @@
   text-align: center;
   margin-bottom: 1rem;
   font-family: "Gothic Serif", serif;
-  color: #dd4c62;
+  color: var(--color-blood-red);
 }
 
 .aboutContent{
@@ -24,7 +28,7 @@
 }
 
 .aboutContent a {
-  color: #dd4c62;
+  color: var(--color-blood-red);
   text-decoration: underline;
 }
 
@@ -40,7 +44,7 @@
 
 .subscribeForm h3 {
   margin-bottom: 1rem;
-  color: #fff;
+  color: var(--color-antique-gold);
 }
 
 .subscribeForm form{
@@ -50,7 +54,7 @@
 }
 
 .subscribeForm button {
-  background: #dd4c62;
+  background: var(--color-blood-red);
   color: white;
   padding: 0.8rem;
   border: none;
@@ -62,7 +66,7 @@
 .subText {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: #aaa;
+  color: var(--color-antique-gold);
 }
 
 @media (max-width: 768px) {
