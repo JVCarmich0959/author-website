@@ -37,7 +37,7 @@ const services = [
     title:    "Newsletter Perks",
     desc:     "Behind-the-scenes notes & micro-stories sent straight to your inbox.",
     linkText: "Subscribe",
-    link:     "#newsletter",
+    link:     "#contact",
   },
 ];
 
