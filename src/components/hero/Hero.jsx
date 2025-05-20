@@ -51,7 +51,7 @@ export default function Hero() {
             </Suspense>
           </Canvas>
           <div className="hImg">
-            <img src="/RR_Cover.jpg" alt= "Raven's Revenge Cover" />
+            <img src="/Hero_bg.png" alt="Hero background" />
           </div>
         </div>
 
