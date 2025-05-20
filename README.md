@@ -43,6 +43,16 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 - Interactive 3D models for signed books, Patreon exclusives and newsletter perks
 - "About the Author" section describing Melissa and her writing journey
 - Newsletter sign‑up form powered by EmailJS
+- Video gallery showcasing book trailers and interviews
 
 The codebase is intentionally minimal to keep the focus on promoting **The Bloodborne Chronicles**. Feel free to adapt it for your own author site or book series.
+
+## Managing Videos
+
+Embedded videos are defined in `src/components/video/VideoGallery.jsx` inside the `videos` array.
+
+1. **Add a video** – append a new object with a unique `id` and `url` pointing to a video file or YouTube embed link.
+2. **Remove a video** – delete its object from the array.
+
+Changes are automatically reflected the next time the app is built or reloaded.
 
