@@ -15,7 +15,7 @@ const spin = {
     }
 };
 
-export default function NewsletterCta({ href = "#newsletter" }) {
+export default function NewsletterCta({ href = "#contact" }) {
     return (
         <motion.a
 
