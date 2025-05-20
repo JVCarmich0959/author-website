@@ -5,17 +5,14 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 ## Key Technologies
 
 - **React + Vite** – component‑driven UI with hot module reloading
-- **Express & EJS** – lightweight server and templating for pages
 - **Tailwind CSS** – utility‑first styling
 - **React Three Fiber** – 3D book and merchandise models
-- **EmailJS** – sends contact and newsletter forms
+- **EmailJS** – sends contact and newsletter forms (requires `VITE_SERVICE_ID`, `VITE_TEMPLATE_ID`, and `VITE_PUBLIC_KEY`)
 
 ## Project Structure
 
 - `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
-- `src/views` – EJS templates rendered by Express
 - `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
-- `server.js` – Express configuration used for server‑side rendering and static file hosting
 
 ## Getting Started
 
@@ -28,11 +25,7 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    npm run dev
    ```
    This launches the React front end with hot reload.
-3. (Optional) run the Express server for the EJS pages
-   ```bash
-   node server.js
-   ```
-4. Build production assets
+3. Build production assets
    ```bash
    npm run build
    ```
