@@ -53,6 +53,7 @@ export default function Hero() {
           <div className="hImg">
             <img src="/Hero_bg.png" alt="Hero background" />
           </div>
+          <div className="hero-slogan">It's in the blood</div>
         </div>
 
         <motion.div
