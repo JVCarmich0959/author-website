@@ -35,7 +35,7 @@ export default function NewsletterCta({ href = "#contact" }) {
             />
             <text className="circleText">
                 <textPath href="#innerCirclePath">
-                    JOIN THE NEWSLETTER
+                    JOIN THE BLOODBORNE BULLETIN
                 </textPath>
             </text>
           </svg>

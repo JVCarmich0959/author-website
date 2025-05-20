@@ -79,7 +79,7 @@ return (
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           >
-            <h3>Join the Raven Post</h3>
+            <h3>Join the Bloodborne Bulletin</h3>
             <form
               action="https://melissamichaelswordpress.com"
               method="POST"
