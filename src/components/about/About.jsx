@@ -1,4 +1,4 @@
-// src/components/books/about/About.jsx
+// src/components/about/About.jsx
 import { useRef } from "react";
 import "./about.css";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
