@@ -155,19 +155,33 @@
 /* COVER IMAGE */
 .hImg {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 90%;
-  width: auto;
-  /* ensure the cover displays above the 3D canvas */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* ensure the image displays above the 3D canvas */
   z-index: 1;
 }
 .hImg img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+}
+
+.hero-slogan {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Cinzel Decorative", serif;
+  font-size: 3rem;
+  color: var(--color-antique-gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  z-index: 2;
+  pointer-events: none;
+  text-align: center;
 }
 
 /* Responsive tweaks */
