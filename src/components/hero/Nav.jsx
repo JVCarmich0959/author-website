@@ -17,7 +17,7 @@
  *   • Vite uses ES Modules, so `import` is how we bring in dependencies.
  */
 
-import React, { useState } from "react"; // useState lets us keep track of “open” vs. “closed”
+import React, { useState, useEffect } from "react"; // useState lets us keep track of “open” vs. “closed”
 import { Link } from "react-router-dom";
 import "./hero.css";                    // our shared hero‐related styles
 
@@ -58,6 +58,15 @@ export default function Nav() {
     }
     setOpen(false);
   };
+
+  // When navigating directly to /#section, scroll there on mount
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      // slight delay allows lazy-loaded sections to render
+      setTimeout(() => goTo(hash), 50);
+    }
+  }, []);
 
   return (
     <nav className="nav">
