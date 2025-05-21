@@ -10,12 +10,8 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 - **EmailJS** – sends contact and newsletter forms (requires `VITE_SERVICE_ID`, `VITE_TEMPLATE_ID`, and `VITE_PUBLIC_KEY`)
 
 ## Project Structure
-
- codex/update-documentation-and-fix-code-issues
 - `src/components` – React components for the hero, about section, services and newsletter form
-
 - `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
- main
 - `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
 
 ## Getting Started
@@ -30,16 +26,13 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    ```
    This launches the React front end with hot reload.
 3. Build production assets
- codex/update-documentation-and-fix-code-issues
-   ```bash
-   npm run build
-   ```
+  ```bash
+  npm run build
+  ```
 4. Run tests
-
-main
-   ```bash
-   npm test
-   ```
+  ```bash
+  npm test
+  ```
 
 ## Environment Variables
 

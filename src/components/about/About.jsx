@@ -1,7 +1,8 @@
 // src/components/about/About.jsx
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./about.css";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
+import emailjs from "@emailjs/browser";
 
 const headingVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -31,9 +32,34 @@ export default function About({ headshot, bio = [], blurb }) {
   const inView = useInView(ref, { margin: "-100px" });
   // scroll progress inside this section
   const { scrollYProgress } = useScroll({ target: ref });
-  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]); 
 
   const bioArray = Array.isArray(bio) ? bio : [bio].filter(Boolean);
+
+  const form = useRef();
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        form.current,
+        { publicKey: import.meta.env.VITE_PUBLIC_KEY }
+      )
+      .then(
+        () => {
+          setSuccess(true);
+          setError(false);
+        },
+        () => {
+          setError(true);
+          setSuccess(false);
+        }
+      );
+  };
 
   return (
     <section id="about" className="about" ref={ref}>
@@ -78,61 +104,39 @@ export default function About({ headshot, bio = [], blurb }) {
           />
         ))}
         {blurb && (
-          <motion.p
-            className="aboutBlurb"
-            variants={contentVariants}
-            custom={bioArray.length}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-codex/modify-about-component-to-accept-props
-            {blurb}
-          </motion.p>
-        )}
-      </div>
-
-      <motion.div
-        className="subscribeForm"
-        variants={formVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-      >
-        <h3>Join the Raven Post</h3>
-        <form
-          action="https://melissamichaelswordpress.com"
-          method="POST"
-          target="_blank"
+        <motion.p
+          className="aboutBlurb"
+          variants={contentVariants}
+          custom={bioArray.length}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
         >
+          {blurb}
+        </motion.p>
+      )}
+    </div>
+
+    <motion.div
+      className="subscribeForm"
+      variants={formVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+    >
+        <h3>Join the Bloodborne Bulletin</h3>
+        <form ref={form} onSubmit={sendEmail}>
           <input
             type="email"
-            name="email"
+            name="user_email"
             placeholder="Enter your email"
             required
           />
           <button type="submit">Subscribe</button>
+          {success && <span>Thanks for subscribing!</span>}
+          {error && <span>Something went wrong!</span>}
         </form>
         <p className="subText">Join 83 other subscribers</p>
       </motion.div>
     </section>
   );
 
-            <h3>Join the Bloodborne Bulletin</h3>
-            <form
-              action="https://melissamichaelswordpress.com"
-              method="POST"
-              target="_blank"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                  />
-                  <button type="submit">Subscribe</button>
-              </form>
-              <p className="subText">Join 83 other subscribers</p>
-          </motion.div>
-  </section>
-);
- main
 }
