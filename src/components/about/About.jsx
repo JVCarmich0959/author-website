@@ -85,7 +85,6 @@ export default function About({ headshot, bio = [], blurb }) {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-codex/modify-about-component-to-accept-props
             {blurb}
           </motion.p>
         )}
@@ -115,24 +114,4 @@ codex/modify-about-component-to-accept-props
       </motion.div>
     </section>
   );
-
-            <h3>Join the Bloodborne Bulletin</h3>
-            <form
-              action="https://melissamichaelswordpress.com"
-              method="POST"
-              target="_blank"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  required
-                  />
-                  <button type="submit">Subscribe</button>
-              </form>
-              <p className="subText">Join 83 other subscribers</p>
-          </motion.div>
-  </section>
-);
- main
 }
