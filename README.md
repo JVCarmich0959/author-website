@@ -10,7 +10,11 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 - **EmailJS** – sends contact and newsletter forms (requires `VITE_SERVICE_ID`, `VITE_TEMPLATE_ID`, and `VITE_PUBLIC_KEY`)
 
 ## Project Structure
+
 - `src/components` – React components for the hero, about section, services and newsletter form
+
+
+
 - `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
 - `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
 
@@ -20,12 +24,18 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    ```bash
    npm install
    ```
-2. Start the Vite dev server
+2. Copy `.env.example` to `.env` and fill in your EmailJS credentials
+
+3. Start the Vite dev server
    ```bash
    npm run dev
    ```
    This launches the React front end with hot reload.
+  codex/create-env-example-and-update-readme
+4. (Optional) run the Express server for the EJS pages
+
 3. Build production assets
+
   ```bash
   npm run build
   ```
@@ -33,6 +43,20 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
   ```bash
   npm test
   ```
+
+   ```bash
+   npm run build
+   ```
+ 
+5. Build production assets
+
+4. Run tests
+main
+   ```bash
+   npm test
+   ```
+   Runs the sample test in `src/App.test.jsx` using Vitest.
+
 
 ## Environment Variables
 
@@ -62,4 +86,15 @@ Embedded videos are defined in `src/components/video/VideoGallery.jsx` inside th
 2. **Remove a video** – delete its object from the array.
 
 Changes are automatically reflected the next time the app is built or reloaded.
+
+## Adding Blog Posts
+
+Blog posts live in `src/posts/` as Markdown files. Each file becomes a post on
+the `/blog` page.
+
+1. Create a new `.md` file inside `src/posts/`.
+2. The file name becomes the post slug, e.g. `my-post.md` -> `/blog/my-post`.
+3. Write your post in standard Markdown. Front matter is not required.
+
+New posts are automatically included the next time the app runs.
 
