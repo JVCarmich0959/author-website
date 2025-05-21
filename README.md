@@ -70,3 +70,14 @@ Embedded videos are defined in `src/components/video/VideoGallery.jsx` inside th
 
 Changes are automatically reflected the next time the app is built or reloaded.
 
+## Adding Blog Posts
+
+Blog posts live in `src/posts/` as Markdown files. Each file becomes a post on
+the `/blog` page.
+
+1. Create a new `.md` file inside `src/posts/`.
+2. The file name becomes the post slug, e.g. `my-post.md` -> `/blog/my-post`.
+3. Write your post in standard Markdown. Front matter is not required.
+
+New posts are automatically included the next time the app runs.
+

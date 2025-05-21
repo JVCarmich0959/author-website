@@ -110,6 +110,9 @@ export default function Nav() {
         <li onClick={() => setOpen(false)} role="menuitem">
           <Link to="/shop">Shop</Link>
         </li>
+        <li onClick={() => setOpen(false)} role="menuitem">
+          <Link to="/blog">Blog</Link>
+        </li>
       </ul>
     </nav>
   );
