@@ -1,22 +1,17 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
 export default defineConfig({
   plugins: [
-    react({
-      // enable React refresh and JSX transform in .js files
-      include: /\.jsx?$/,
-    }),
+    // use default settings so React plugin handles JSX in .jsx and .js
+    react(),
   ],
-  esbuild: {
-    // treat .js files as having JSX syntax
-    loader: 'jsx',
-    include: /src\/.*\.js$/,
-  },
   resolve: {
     alias: {
-      'react-markdown': path.resolve('./src/lib/react-markdown-shim.jsx'),
+      // point markdown imports to your shim
+      'react-markdown': path.resolve(__dirname, 'src/lib/react-markdown-shim.jsx'),
     },
   },
   test: {
