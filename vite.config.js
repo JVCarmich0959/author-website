@@ -16,7 +16,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'react-markdown': path.resolve('./src/lib/react-markdown-shim.js'),
+      'react-markdown': path.resolve('./src/lib/react-markdown-shim.jsx'),
     },
   },
   test: {
