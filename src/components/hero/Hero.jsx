@@ -20,7 +20,7 @@ export default function Hero() {
       <section id="home" className="hero">
         <div className="hSection left">
           <motion.h1
-            initial={{ y: -100, opactiy: 0 }}
+            initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1}}
             className="hTitle"
