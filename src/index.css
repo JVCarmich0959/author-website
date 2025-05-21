@@ -91,3 +91,39 @@ p, li {
 @media (min-width: 1536px) {
   .container { max-width: 1536px; }
 }
+
+/* Accessible skip link styling */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: var(--color-blood-red);
+  color: #fff;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+/* Global focus style */
+:focus-visible {
+  outline: 2px dashed var(--color-blood-red);
+  outline-offset: 2px;
+}
+
+/* Footer styles */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.875rem;
+  background: rgba(0, 0, 0, 0.2);
+}
