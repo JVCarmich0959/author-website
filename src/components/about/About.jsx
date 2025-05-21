@@ -30,9 +30,8 @@ const formVariants = {
 export default function About({ headshot, bio = [], blurb }) {
   const ref = useRef();
   const inView = useInView(ref, { margin: "-100px" });
-  // scroll progress inside this section
   const { scrollYProgress } = useScroll({ target: ref });
-  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]); 
+  const progress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const bioArray = Array.isArray(bio) ? bio : [bio].filter(Boolean);
 
@@ -63,7 +62,7 @@ export default function About({ headshot, bio = [], blurb }) {
 
   return (
     <section id="about" className="about" ref={ref}>
-      {/* little gold progress bar */}
+      {/* progress bar */}
       <motion.div className="about_progress" style={{ scaleX: progress }} />
 
       <motion.h2
@@ -104,24 +103,24 @@ export default function About({ headshot, bio = [], blurb }) {
           />
         ))}
         {blurb && (
-        <motion.p
-          className="aboutBlurb"
-          variants={contentVariants}
-          custom={bioArray.length}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          {blurb}
-        </motion.p>
-      )}
-    </div>
+          <motion.p
+            className="aboutBlurb"
+            variants={contentVariants}
+            custom={bioArray.length}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            {blurb}
+          </motion.p>
+        )}
+      </div>
 
-    <motion.div
-      className="subscribeForm"
-      variants={formVariants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-    >
+      <motion.div
+        className="subscribeForm"
+        variants={formVariants}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+      >
         <h3>Join the Bloodborne Bulletin</h3>
         <form ref={form} onSubmit={sendEmail}>
           <input
@@ -138,5 +137,4 @@ export default function About({ headshot, bio = [], blurb }) {
       </motion.div>
     </section>
   );
-
 }

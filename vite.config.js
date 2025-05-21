@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'react-markdown': path.resolve('./src/lib/react-markdown-shim.js'),
+      'react-markdown': path.resolve('./src/lib/react-markdown-shim.jsx'),
     },
   },
   test: {
