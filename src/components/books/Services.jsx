@@ -84,7 +84,7 @@ export default function Services() {
               onClick={() => setCurrent(s.id)}
             >
               <div className="serviceIcon">
-                <img src={s.icon} alt={s.title} />
+                <img src={s.icon} alt={s.title} loading="lazy" />
               </div>
               <div className="serviceInfo">
                 <h2>{s.title}</h2>
