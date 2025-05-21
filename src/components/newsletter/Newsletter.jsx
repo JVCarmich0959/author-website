@@ -54,12 +54,13 @@ const Contact = () => {
   const isInView = useInView(ref, { margin: "-200px" });
 
   return (
-    <div className="contact" ref={ref} onSubmit={sendEmail}>
+    <div className="contact" ref={ref}>
       <div className="cSection">
         <motion.form
           ref={form}
           variants={listVariant}
           animate={isInView ? "animate" : "initial"}
+          onSubmit={sendEmail}
         >
           <motion.h1 variants={listVariant} className="cTitle">
             Let's keep in touch
