@@ -18,6 +18,7 @@
  */
 
 import React, { useState } from "react"; // useState lets us keep track of “open” vs. “closed”
+import { Link } from "react-router-dom";
 import "./hero.css";                    // our shared hero‐related styles
 
 // Define each section we want to scroll to.
@@ -26,7 +27,7 @@ const sections = [
   { id: "home",     label: "Home"     },
   { id: "about",    label: "About"    },
   { id: "services", label: "Offerings"},
-  { id: "contact",  label: "Newsletter" },
+  { id: "contact",  label: "Bulletin" },
 ];
 
 /**
@@ -52,6 +53,8 @@ export default function Nav() {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/#${id}`;
     }
     setOpen(false);
   };
@@ -104,6 +107,9 @@ export default function Nav() {
             {s.label}
           </li>
         ))}
+        <li onClick={() => setOpen(false)} role="menuitem">
+          <Link to="/shop">Shop</Link>
+        </li>
       </ul>
     </nav>
   );
