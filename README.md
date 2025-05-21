@@ -21,25 +21,17 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    npm install
    ```
 2. Copy `.env.example` to `.env` and fill in your EmailJS credentials
-
 3. Start the Vite dev server
    ```bash
    npm run dev
    ```
    This launches the React front end with hot reload.
-  
 4. (Optional) run the Express server for the EJS pages
-
-3. Build production assets
-main
+5. Build production assets
    ```bash
    npm run build
    ```
-
-5. Build production assets
-
-4. Run tests
-main
+6. Run tests
    ```bash
    npm test
    ```
