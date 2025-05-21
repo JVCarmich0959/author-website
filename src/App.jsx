@@ -6,9 +6,10 @@ const Services  = lazy(() => import("./components/books/Services"));
 const About      = lazy(() => import("./components/about/About"));
 const VideoGallery = lazy(() => import("./components/video/VideoGallery"));
 const Newsletter = lazy(() => import("./components/newsletter/Newsletter"));
+const Footer = lazy(() => import("./components/footer/Footer"));
 
 const App = () => (
-  <div className="container">
+  <main id="main" className="container">
     {/* No more ugly "loading..." text */}
     <Suspense fallback={null}>
       <LazyLoad height="100vh" offset={-100}>
@@ -56,7 +57,10 @@ const App = () => (
         </section>
       </LazyLoad>
     </Suspense>
-  </div>
+    <Suspense fallback={null}>
+      <Footer />
+    </Suspense>
+  </main>
 );
 
 export default App;
