@@ -96,7 +96,7 @@ export default function About({ headshot, bio = [], blurb }) {
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
-        <h3>Join the Raven Post</h3>
+        <h3>Subscribe to the Newsletter</h3>
         <form
           action="https://melissamichaelswordpress.com"
           method="POST"
