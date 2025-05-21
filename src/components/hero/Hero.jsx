@@ -51,7 +51,7 @@ export default function Hero() {
             </Suspense>
           </Canvas>
           <div className="hImg">
-            <img src="/Hero_bg.png" alt="Hero background" />
+            <img src="/Hero_bg.png" alt="Hero background" loading="lazy" />
           </div>
           <div className="hero-slogan">It's in the blood</div>
         </div>

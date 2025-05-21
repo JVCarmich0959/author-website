@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import matter from 'gray-matter'
 
-const modules = import.meta.glob('../posts/*.md', { eager: true, as: 'raw' })
-const posts = Object.entries(modules).map(([path, content]) => {
-  const slug = path.split('/').pop().replace(/\.md$/, '')
-  const { data } = matter(content)
-  return { slug, ...data }
-}).sort((a, b) => new Date(b.date) - new Date(a.date))
+const modules = import.meta.glob('../posts/*.md', { as: 'raw' })
+
+async function loadPosts() {
+  const entries = await Promise.all(
+    Object.entries(modules).map(async ([path, loader]) => {
+      const content = await loader()
+      const slug = path.split('/').pop().replace(/\.md$/, '')
+      const { data } = matter(content)
+      return { slug, ...data }
+    })
+  )
+  return entries.sort((a, b) => new Date(b.date) - new Date(a.date))
+}
 
 export default function Blog() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    loadPosts().then(setPosts)
+  }, [])
+
   return (
     <div className="blog">
       {posts.map((post) => (

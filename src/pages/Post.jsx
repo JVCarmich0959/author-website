@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import matter from 'gray-matter'
 
-const modules = import.meta.glob('../posts/*.md', { eager: true, as: 'raw' })
-const posts = Object.entries(modules).map(([path, content]) => {
-  const slug = path.split('/').pop().replace(/\.md$/, '')
+const modules = import.meta.glob('../posts/*.md', { as: 'raw' })
+
+async function loadPost(slug) {
+  const loader = modules[`../posts/${slug}.md`]
+  if (!loader) return null
+  const content = await loader()
   const { data, content: body } = matter(content)
   return { slug, ...data, body }
-})
+}
 
 export default function Post() {
   const { slug } = useParams()
-  const post = posts.find((p) => p.slug === slug)
+  const [post, setPost] = useState()
+
+  useEffect(() => {
+    loadPost(slug).then(setPost)
+  }, [slug])
+
+  if (post === undefined) {
+    return <div className="prose mx-auto">Loading...</div>
+  }
+
   if (!post) {
     return <div className="prose mx-auto">Post not found.</div>
   }
+
   return (
     <article className="prose mx-auto">
       <h1>{post.title}</h1>
