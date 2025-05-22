@@ -92,6 +92,32 @@ export default function About({ headshot, bio = [], blurb }) {
       </div>
 
       <motion.div
+        className="socialLinks"
+        variants={contentVariants}
+        custom={bioArray.length + 1}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+      >
+        <a href="https://instagram.com" target="_blank" rel="noreferrer">
+          <img src="/instagram.png" alt="Instagram" />
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noreferrer">
+          <img src="/facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="32"
+            height="32"
+            fill="currentColor"
+          >
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.26 4.26 0 001.88-2.36 8.53 8.53 0 01-2.7 1.03 4.23 4.23 0 00-7.24 3.86A12 12 0 013 5.2a4.22 4.22 0 001.31 5.64 4.2 4.2 0 01-1.92-.53v.05a4.23 4.23 0 003.39 4.14 4.2 4.2 0 01-1.9.07 4.23 4.23 0 003.95 2.94A8.5 8.5 0 012 19.54 12 12 0 008.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18 0-.36-.01-.54A8.36 8.36 0 0022.46 6z" />
+          </svg>
+        </a>
+      </motion.div>
+
+      <motion.div
         className="subscribeForm"
         variants={formVariants}
         initial="hidden"
