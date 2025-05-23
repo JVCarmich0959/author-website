@@ -1,4 +1,4 @@
-.simple-service {
+.book-preview {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,14 +6,21 @@
   text-align: center;
 }
 
-.serviceInner {
+.preview-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.bookBlurb {
+.preview-title {
+  font-size: 2rem;
+  color: var(--color-blood-red);
+}
+
+.preview-description {
   max-width: 600px;
   line-height: 1.6;
+  color: var(--color-antique-gold);
+  font-family: "Cinzel Decorative", serif;
 }
