@@ -73,9 +73,7 @@ export default function Nav() {
         <li onClick={() => setOpen(false)} role="menuitem">
           <Link to="/blog">Blog</Link>
         </li>
-        <li className="ml-4">
-          <ThemeToggle />
-        </li>
+        
       </ul>
     </nav>
   );
