@@ -29,7 +29,6 @@ const App = () => (
       <LazyLoad height="600vh" offset={-100}>
         <section id="about">
           <About
-            headshot="/p1.png"
             bio={[
               'Melissa Michaels is an author, reader, and aspiring novelist. Her love of writing grew out of her passion for reading, her tastes leaning towards Urban Fantasy.',
               'She is the author of <i>Ravens Transformation</i>, an Urban Fantasy short story featured in Abaculus III, a collection of international tales of science fiction, fantasy, and horror.',
