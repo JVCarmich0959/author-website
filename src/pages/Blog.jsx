@@ -1,6 +1,12 @@
+
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import Nav from '../components/hero/Nav'
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import matter from 'gray-matter'
+
 
 const modules = import.meta.glob('../posts/*.md', { as: 'raw' })
 
@@ -24,6 +30,17 @@ export default function Blog() {
   }, [])
 
   return (
+
+    <div className="container blog-page">
+      <Nav />
+      <main className="blog">
+        {posts.map((post) => (
+          <article key={post.id} className="prose mx-auto mb-8">
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </article>
+        ))}
+      </main>
+
     <div className="blog">
       {posts.map((post) => (
         <article key={post.slug} className="prose mx-auto mb-8">
@@ -33,6 +50,7 @@ export default function Blog() {
           <p>{post.summary}</p>
         </article>
       ))}
+
     </div>
   )
 }

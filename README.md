@@ -88,3 +88,6 @@ the `/blog` page and can be viewed individually at `/blog/<slug>`.
 
 New posts are automatically included the next time the app runs.
 
+The blog page uses the same navigation bar as the rest of the site, so readers
+can return to the homepage or shop with the links at the top.
+
