@@ -1,24 +1,20 @@
+
 .contact {
   height: 100%;
   display: flex;
-  gap: 100px;
+  justify-content: center;
+  padding: 20px;
 }
 
 .cSection {
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  max-width: 600px;
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.cSection:last-child {
-  background-color: rgba(2, 2, 45, 0.187);
-  margin: 50px 0px;
-  padding: 50px;
-  border-radius: 50% 0px;
-}
 
 form {
   width: 80%;
@@ -75,12 +71,5 @@ label {
 
   .cSection {
     width: 100%;
-  }
-
-  .cSection:first-child {
-    height: 70%;
-  }
-  .cSection:last-child {
-    height: 30%;
   }
 }

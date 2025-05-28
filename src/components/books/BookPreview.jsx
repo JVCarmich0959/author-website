@@ -10,7 +10,7 @@ export default function BookPreview() {
         <div className="preview-description">
           <h2 className="preview-title">Raven's Revenge</h2>
           <p>
-            Launching the <em>Bloodborne Chronicles</em>—a dark tale of magic and retribution.
+            Raven's Revenge kicks off the <em>Bloodborne Chronicles</em> with a gripping tale of sorcery and payback.
           </p>
         </div>
       </div>

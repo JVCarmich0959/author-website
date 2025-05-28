@@ -121,6 +121,14 @@
   box-shadow: var(--shadow-md);
 }
 
+.contactLink {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  text-decoration: none;
+  z-index: 50;
+}
+
 .hImg {
   position: absolute;
   inset: 0;
