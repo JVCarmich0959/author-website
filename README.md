@@ -26,12 +26,11 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    npm run dev
    ```
    This launches the React front end with hot reload.
-4. (Optional) run the Express server for the EJS pages
-5. Build production assets
+4. Build production assets
    ```bash
    npm run build
    ```
-6. Run tests
+5. Run tests
    ```bash
    npm test
    ```
