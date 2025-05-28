@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import matter from 'gray-matter'
+import { Buffer } from 'buffer'
 
-const modules = import.meta.glob('../posts/*.md', { as: 'raw' })
+const modules = import.meta.glob('../posts/*.md', { query: '?raw', import: 'default' })
+window.Buffer = window.Buffer || Buffer
 
 async function loadPost(slug) {
   const loader = modules[`../posts/${slug}.md`]
@@ -30,7 +32,7 @@ export default function Post() {
   }
 
   return (
-    <article className="prose mx-auto">
+    <article className="prose mx-auto p-4 bg-black/40 rounded">
       <h1>{post.title}</h1>
       <ReactMarkdown>{post.body}</ReactMarkdown>
     </article>

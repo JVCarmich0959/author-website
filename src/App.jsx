@@ -5,7 +5,6 @@ const Hero = lazy(() => import("./components/hero/Hero"));
 const Services = lazy(() => import("./components/books/BookPreview"));
 const About = lazy(() => import("./components/about/About"));
 const Newsletter = lazy(() => import("./components/newsletter/Newsletter"));
-const Footer = lazy(() => import("./components/footer/Footer"));
 
 const App = () => (
   <main id="main" className="container">
@@ -48,9 +47,6 @@ const App = () => (
       </LazyLoad>
     </Suspense>
 
-    <Suspense fallback={null}>
-      <Footer />
-    </Suspense>
   </main>
 );
 

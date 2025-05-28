@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import matter from 'gray-matter'
+import { Buffer } from 'buffer'
 
-const modules = import.meta.glob('../posts/*.md', { as: 'raw' })
+const modules = import.meta.glob('../posts/*.md', { query: '?raw', import: 'default' })
+window.Buffer = window.Buffer || Buffer
 
 async function loadPosts() {
   const entries = await Promise.all(
@@ -24,12 +26,18 @@ export default function Blog() {
   }, [])
 
   return (
-    <div className="blog">
+    <div className="container py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
-        <article key={post.slug} className="prose mx-auto mb-8">
-          <h2>
+        <article
+          key={post.slug}
+          className="bg-black/40 p-6 rounded shadow hover:shadow-lg hover:-translate-y-1 transition"
+        >
+          <h2 className="text-xl mb-2">
             <Link to={`/blog/${post.slug}`}>{post.title}</Link>
           </h2>
+          <p className="text-sm opacity-75 mb-4">
+            {new Date(post.date).toLocaleDateString()}
+          </p>
           <p>{post.summary}</p>
         </article>
       ))}

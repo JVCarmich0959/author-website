@@ -2,7 +2,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { motion } from "motion/react";
-import Nav from "./Nav";
 import Shape from "./Shape";
 import NewsletterCta from "./NewsletterCta";
 import "./hero.css";
@@ -15,8 +14,6 @@ export default function Hero() {
 
   return (
     <>
-      <Nav />
-
       <section id="home" className="hero">
         <div className="hSection left">
           <motion.h1
