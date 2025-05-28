@@ -2,42 +2,42 @@
 
 :root {
   /* color palette */
-  --color-black: #010800;
-  --color-burgundy: #1B0C00;
-  --color-chocolate: #351304;
-  --color-russet: #8C5431;
-  --color-blood-red: #B9211D;
-  --color-antique-gold: #CDB48B;
+  --black: #010800;
+  --burgundy: #1B0C00;
+  --chocolate: #351304;
+  --russet: #8C5431;
+  --blood-red: #B9211D;
+  --antique-gold: #CDB48B;
+
+  /* reusable shadows */
+  --shadow-md: 0 0 8px rgba(0,0,0,0.7);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.8);
+
+  /* reusable gradients */
+  --bg-gradient: linear-gradient(180deg, var(--black) 0%, var(--burgundy) 80%, var(--black) 100%);
 }
 
+/* Base Styles */
 .hero {
   position: relative;
   height: 100%;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   font-family: "Cinzel Decorative", serif;
-  color: var(--color-antique-gold);
+  color: var(--antique-gold);
+  padding-top: 4rem; /* ensures Hero sits below nav */
 }
 
 .bg {
   position: absolute;
   inset: 0;
-  /*
-   * Place the background layer behind hero content but
-   * above the page background so the image remains visible.
-   */
   z-index: 0;
-  background: linear-gradient(
-    180deg,
-    var(--color-black) 0%,
-    var(--color-burgundy) 80%,
-    var(--color-black) 100%
-  );
+  background: var(--bg-gradient);
 }
 
 .hSection {
-  width: 50%;
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,128 +46,93 @@
 .hSection.left { align-items: flex-start; }
 .hSection.right { align-items: flex-end; }
 
-/* MAIN TITLE */
 .hTitle {
   margin-top: 3rem;
-  font-size: 4rem;
+  font-size: clamp(2rem, 4vw, 4rem);
   line-height: 1.1;
-  color: var(--color-blood-red);
-  text-shadow:
-    4px 4px 8px rgba(0,0,0,0.8),
-   -2px -2px 4px rgba(27,12,0,0.5);
+  color: var(--blood-red);
+  text-shadow: 4px 4px 8px rgba(0,0,0,0.8), -2px -2px 4px rgba(27,12,0,0.5);
 }
 .hTitle span {
-  color: var(--color-antique-gold);
+  color: var(--antique-gold);
   font-style: italic;
 }
 
-/* LITTLE GOTHIC PLAQUE */
-.awards {
-  width: 30%;
+.awards, .certificate {
   background: rgba(27,12,0,0.6);
   padding: 1rem;
-  border: 2px solid var(--color-blood-red);
+  border: 2px solid var(--blood-red);
   border-radius: 4px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+  box-shadow: inset var(--shadow-md);
+  text-align: center;
 }
+
 .awards h2 {
-  color: var(--color-antique-gold);
+  color: var(--antique-gold);
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
-.awards p {
-  color: var(--color-chocolate);
+
+.awards p, .circleText {
+  color: var(--chocolate);
   font-size: 0.9rem;
   line-height: 1.4;
 }
+
 .awardList {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  justify-content: center;
 }
+
 .awardList img {
   width: 32px;
   height: 32px;
   padding: 0.25rem;
-  background: var(--color-antique-gold);
+  background: var(--antique-gold);
   border-radius: 50%;
-  box-shadow: 0 0 4px rgba(0,0,0,0.7);
+  box-shadow: var(--shadow-md);
 }
 
-/* SCROLL HINT */
-.scroll {
-  margin-bottom: 2rem;
-}
-.scroll svg path {
-  stroke: var(--color-antique-gold);
+.scroll svg path, .arrow svg {
+  stroke: var(--antique-gold);
 }
 
-/* SOCIAL PANEL */
 .follow {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
   background: rgba(27,12,0,0.8);
-  border-left: 4px solid var(--color-russet);
+  border-left: 4px solid var(--russet);
 }
+
 .follow img {
   width: 24px;
   height: 24px;
   filter: grayscale(100%) brightness(1.2);
 }
 
-/* REMOVED bubble (optional) */
-
-/* SIGNED CTA */
-.certificate {
-  background: rgba(27,12,0,0.6);
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--color-blood-red);
-  border-radius: 6px;
-  color: var(--color-antique-gold);
-  font-weight: 300;
-  text-align: center;
-  line-height: 1.2;
-  box-shadow: 0 0 6px rgba(0,0,0,0.6);
-}
-
-/* NEWSLETTER BUTTON */
-.contactLink {
-  margin-bottom: 2rem;
-}
 .contactButton {
-  position: relative;
   display: inline-block;
-  border: 2px solid var(--color-antique-gold);
+  border: 2px solid var(--antique-gold);
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0,0,0,0.7);
-}
-.circleText {
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  fill: var(--color-chocolate);
-}
-.arrow svg {
-  stroke: var(--color-chocolate);
+  box-shadow: var(--shadow-md);
 }
 
-/* COVER IMAGE */
 .hImg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* ensure the image displays above the 3D canvas */
+  inset: 0;
   z-index: 1;
 }
+
 .hImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+  box-shadow: var(--shadow-lg);
 }
 
 .hero-slogan {
@@ -175,63 +140,42 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Cinzel Decorative", serif;
-  font-size: 3rem;
-  color: var(--color-antique-gold);
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  color: var(--antique-gold);
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
   z-index: 2;
   pointer-events: none;
   text-align: center;
 }
 
-/* Responsive tweaks */
+/* Responsive Design */
 @media (max-width: 1280px) {
-  .hTitle { font-size: 3rem; }
-  .awards  { width: 50%; }
+  .awards { width: 50%; }
 }
 
 @media (max-width: 1024px) {
-  .hero       { flex-direction: column; }
-  .hSection   { width: 100%; align-items: center; text-align: center; }
+  .hero { flex-direction: column; }
+  .hSection { align-items: center; text-align: center; }
   .follow, .certificate { display: none; }
-  .awards     { width: 80%; }
+  .awards { width: 80%; }
 }
 
-/* Top nav */
-
-/** Basic understanding of CSS elements::after
- * 1. The selector (e.g., .nav) targets the HTML element with the class "nav" (or any other specified selector).
- * 2. The properties (e.g., position, top, left) define the location and appearance of the element on the HTML page.
- * 3. The values (e.g., fixed, 0, 2rem) specify the exact behavior or style of the properties.
- * 4. DON'T FORGET THE SEMICOLON AT THE END OF EACH LINE!
- * 5. The curly braces {} group the properties and values together for that specific style selector.
- * 6. The CSS file is linked to the HTML file, allowing the styles to be applied to the elements in the HTML document.
- * 7. The CSS file can be external, internal, or inline, but external is the most common for larger projects.
- * 8. Comments in CSS can help document the purpose and usage of styles for better maintainability.
- */
-
+/* Nav Styles */
 .nav {
-  position: fixed; /* the fixed position argument makes the nav stick to the top */
-  top: 0; /* arguments like 'top', 'left' , 'right ' tell the  page where to position the element */
-  left: 0; 
-  right: 0;
-  padding: 1rem 2rem; /* the 'padding' argument tells the page how much space to leave around an element */
-  display: flex; /* the 'display' argument with the value 'flex'  makes the element a flex container */
-  /* a flex container is a box that can hold other elements */
-
-  /* a flex container is a box that can hold other boxes */
-  align-items: center; /* the 'align-items' argument tells the page how to align the items in the flex container */
-  /* the value 'center' tells the page to center the items vertically */
-  justify-content: space-between; /* the 'justify-content' argument tells the page how to distribute space between items within 
-  the flex container */
-  background: rgba(1, 8, 0, 0.85); /* the 'background' argument tells the page what color to make the background of the element */
-  z-index: 100; /* The z-index ensures the nav is above other elements */
+  position: fixed;
+  inset: 0 0 auto 0;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(1,8,0,0.85);
+  z-index: 100;
 }
 
 .nav__logo {
-  font-family: "Cinzel Decorative", serif; /* the 'font-family' argument tells the page what font to use for the text */
-  color: var(--color-antique-gold); /* the 'color' argument tells the page what color to make the text */
-  cursor: pointer; /* the 'cursor' argument tells the page what cursor to show when hovering over the element */
+  font-family: inherit;
+  color: var(--antique-gold);
+  cursor: pointer;
 }
 
 .nav__links {
@@ -242,85 +186,51 @@
 
 .nav__links li {
   cursor: pointer;
-  color: var(--color-antique-gold);
+  color: var(--antique-gold);
   transition: color 0.2s;
 }
 
-/* hamburger */
 .nav__toggle {
-  display: none; /* the 'display argument with the value 'none' hides the element */
-  flex-direction: column; /* the 'flex-direction' argument with the value 'column' makes the element a flex container with a column layout */
-  gap: 4px; /* the 'gap' argument tells the page how much space to leave between the items in the flex container */
-  cursor: pointer; /* the 'cursor' argument tells the page what cursor to show when hovering over the element */
+  display: none;
+  flex-direction: column;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
 }
+
 .nav__toggle span {
   width: 24px;
   height: 2px;
-  background: var(--color-antique-gold);
+  background: var(--antique-gold);
   transition: transform 0.3s;
 }
 
-.nav__toggle--open span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.nav__toggle--open span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav__toggle--open span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* mobile */
+.nav__toggle--open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav__toggle--open span:nth-child(2) { opacity: 0; }
+.nav__toggle--open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 768px) {
   .nav__links {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-black);
+    inset-inline: 0;
+    background: var(--black);
     flex-direction: column;
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.3s ease-out;
-    overflow: hidden;
   }
-  .nav__links--open {
-    transform: scaleY(1);
-  }
-  .nav__toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    width: 40px;
-    background: var(--color-black);
-    border-radius: 5px;
-  }
+  .nav__links--open { transform: scaleY(1); }
+  .nav__toggle { display: flex; height: 40px; width: 40px; background: var(--black); border-radius: 5px; }
 }
 
-/* back-to-top arrow */
-.to-top{
+.to-top {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background: rgba(27,12);
   border-radius: 50%;
   padding: 0.5rem;
   cursor: pointer;
   z-index: 50;
-}
-
-.to-top svg {
-  display: block;
-}
-
-/* make sure Hero sits below nav bar */
-.hero{
-  padding-top: 4rem;
 }

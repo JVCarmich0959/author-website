@@ -69,11 +69,22 @@ Changes are automatically reflected the next time the app is built or reloaded.
 ## Adding Blog Posts
 
 Blog posts live in `src/posts/` as Markdown files. Each file becomes a post on
-the `/blog` page.
+the `/blog` page and can be viewed individually at `/blog/<slug>`.
 
 1. Create a new `.md` file inside `src/posts/`.
-2. The file name becomes the post slug, e.g. `my-post.md` -> `/blog/my-post`.
-3. Write your post in standard Markdown. Front matter is not required.
+2. Add a YAML front matter block with at least `title`, `date`, and `summary`.
+   Example:
+
+   ```markdown
+   ---
+   title: "My Post"
+   date: "2024-01-01"
+   summary: "A short summary"
+   ---
+   ```
+
+3. The file name becomes the post slug, e.g. `my-post.md` -> `/blog/my-post`.
+4. Write the rest of your post in standard Markdown.
 
 New posts are automatically included the next time the app runs.
 

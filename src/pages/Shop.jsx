@@ -5,10 +5,8 @@ export default function Shop() {
     <div className="container shop-page">
       <Nav />
       <main className="shop-content">
-        <h1>Merchandise Shop</h1>
-        <div className="items">
-          {/* TODO: merchandise items will be displayed here */}
-        </div>
+        <h1>Coming Soon!</h1>
+        <p>The merchandise shop is currently under construction. Check back soon for updates!</p>
       </main>
     </div>
   );
