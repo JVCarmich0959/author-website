@@ -7,12 +7,6 @@ const slideIn = {
     animate: { x: 0, opacity: 1, transition: { duration: 2 } },
 };
 
-const spin = {
-    animate: {
-        rotate: [0, 360],
-        transition: { duration: 10, repeat: Infinity, ease: "linear" },
-    },
-};
 
 export default function NewsletterCta({ href = "#contact" }) {
     return (
@@ -23,9 +17,13 @@ export default function NewsletterCta({ href = "#contact" }) {
             animate="animate"
             className="contactLink"
         >
-            <motion.div className="contactButton" variants={spin}>
+        <motion.div
+            className="contactButton"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 2, ease: "linear" }}
+        >
                 <svg viewBox="0 0 200 200" width="150" height="150">
-                    <circle cx="100" cy="100" r="90" fill="#d23d3d" />
+                    <circle cx="100" cy="100" r="90" fill="var(--blood-red)" />
                     <path
                         id="innerCirclePath"
                         fill="none"
