@@ -1,7 +1,7 @@
 // src/components/hero/Nav.jsx
 
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./hero.css";
 
 const sections = [
@@ -12,23 +12,34 @@ const sections = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const goTo = useCallback((id) => {
+  const scrollTo = useCallback((id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.location.hash = id;
     }
-    setOpen(false);
   }, []);
 
+  const goTo = useCallback(
+    (id) => {
+      if (location.pathname !== "/") {
+        navigate(`/#${id}`);
+      } else {
+        scrollTo(id);
+      }
+      setOpen(false);
+    },
+    [location.pathname, navigate, scrollTo]
+  );
+
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
+    const hash = location.hash.slice(1);
     if (hash) {
-      setTimeout(() => goTo(hash), 50);
+      setTimeout(() => scrollTo(hash), 50);
     }
-  }, [goTo]);
+  }, [location, scrollTo]);
 
   return (
     <nav className="nav">
