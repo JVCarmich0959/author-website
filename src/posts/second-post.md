@@ -2,6 +2,10 @@
 title: "Behind the Scenes"
 date: "2023-02-15"
 summary: "A preview of upcoming work"
+tags:
+  - sneak peek
+  - writing
+thumbnail: "/RR_Cover.jpg"
 ---
 
 # Behind the Scenes

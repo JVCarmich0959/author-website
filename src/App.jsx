@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import SEO from './components/utility/SEO'
 import LazyLoad from "react-lazyload";
 
 const Hero = lazy(() => import("./components/hero/Hero"));
@@ -8,6 +9,7 @@ const Newsletter = lazy(() => import("./components/newsletter/Newsletter"));
 
 const App = () => (
   <main id="main" className="container">
+    <SEO title="Melissa Michaels" description="Urban fantasy author" />
     <Suspense fallback={null}>
       <LazyLoad height="100vh" offset={-100}>
         <section id="home">
