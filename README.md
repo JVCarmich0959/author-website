@@ -18,8 +18,9 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 
 1. Install dependencies
    ```bash
-   npm install
+   make install
    ```
+   This installs both Node and Python requirements.
 2. Copy `.env.example` to `.env` and fill in your EmailJS credentials
 3. Start the Vite dev server
    ```bash
@@ -35,6 +36,11 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    npm test
    ```
    Runs the sample test in `src/App.test.jsx` using Vitest.
+6. Install git hooks
+   ```bash
+   pre-commit install
+   ```
+   This enables automatic formatting and lint checks before each commit.
 
 ## Environment Variables
 
@@ -44,6 +50,18 @@ Create a `.env` file based on `.env.example` and fill in your EmailJS credential
 VITE_SERVICE_ID=your_service_id
 VITE_TEMPLATE_ID=your_template_id
 VITE_PUBLIC_KEY=your_public_key
+```
+
+## Makefile Commands
+
+The repository includes a `Makefile` for convenience. Useful targets:
+
+```bash
+make install    # install npm and pip requirements
+make lint       # run flake8, black --check and isort
+make format     # apply black and isort formatting
+make test       # run Vitest and pytest
+make precommit  # run all pre-commit hooks
 ```
 
 ## Features
