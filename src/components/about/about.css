@@ -31,6 +31,9 @@
   color: var(--color-blood-red);
   text-decoration: underline;
 }
+.aboutContent a:hover {
+  color: var(--color-antique-gold);
+}
 
 .headshot {
   display: block;

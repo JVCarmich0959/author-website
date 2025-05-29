@@ -41,12 +41,13 @@ body {
 a {
   color: var(--color-antique-gold);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, filter 0.3s ease;
 }
 a:hover,
 a:focus {
   color: var(--color-blood-red);
   text-shadow: 0 0 6px rgba(185,33,29,0.7);
+  filter: brightness(1.2);
 }
 
 /* content container centering */
