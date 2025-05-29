@@ -36,7 +36,7 @@ export default function About({ headshot, bio = [], blurb }) {
   const bioArray = Array.isArray(bio) ? bio : [bio].filter(Boolean);
 
   return (
-    <section id="about" className="about" ref={ref}>
+    <section id="about" className="about container mx-auto py-12" ref={ref}>
       {/* little gold progress bar */}
       <motion.div className="about_progress" style={{ scaleX: progress }} />
 

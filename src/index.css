@@ -8,6 +8,8 @@
   --color-russet: #8C5431;
   --color-blood-red: #B9211D;
   --color-antique-gold: #CDB48B;
+  --color-gray-700: #444444;
+  --color-gray-300: #d1d5db;
 }
 
 * {
@@ -22,7 +24,7 @@ html {
   scroll-behavior: smooth;
   background: var(--color-black);
   color: var(--color-antique-gold);
-  font-family: "Cinzel Decorative", serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
@@ -125,7 +127,7 @@ p, li {
   text-align: center;
   padding: 2rem 0;
   font-size: 0.875rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-gray-700, rgba(0,0,0,0.2));
 }
 
 /* Light theme overrides */

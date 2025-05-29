@@ -18,8 +18,8 @@ export default function NewsletterCta({ href = "#contact" }) {
             className="contactLink"
         >
         <motion.div
-            className="contactButton"
-            whileHover={{ rotate: 360 }}
+            className="contactButton animate-pulse"
+            whileHover={{ rotate: 360, scale: 1.1 }}
             transition={{ duration: 2, ease: "linear" }}
         >
                 <svg viewBox="0 0 200 200" width="150" height="150">

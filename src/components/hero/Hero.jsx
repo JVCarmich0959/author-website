@@ -1,5 +1,5 @@
 // src/components/hero/Hero.jsx
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { motion } from "motion/react";
 import Shape from "./Shape";
@@ -7,6 +7,10 @@ import NewsletterCta from "./NewsletterCta";
 import "./hero.css";
 
 export default function Hero() {
+  const prefersReducedMotion = useMemo(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  );
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -30,8 +34,14 @@ export default function Hero() {
           <motion.a
             href="#about"
             className="scroll"
-            animate={{ y: [0, 5], opacity: [0, 1, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            animate={
+              prefersReducedMotion ? undefined : { y: [0, 5], opacity: [0, 1, 0] }
+            }
+            transition={
+              prefersReducedMotion
+                ? undefined
+                : { repeat: Infinity, duration: 4, ease: "easeInOut" }
+            }
           >
             {/* Scroll-down SVG placeholder */}
           </motion.a>
