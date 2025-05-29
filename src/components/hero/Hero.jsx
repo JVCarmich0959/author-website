@@ -44,7 +44,7 @@ export default function Hero() {
             </Suspense>
           </Canvas>
           <div className="hImg">
-            <img src="/Raven.gif" alt="Hero background" loading="lazy" />
+            <img src="/Hero_bg.png" alt="Hero background" loading="lazy" />
           </div>
           <div className="hero-slogan">
             {slogan.map((word, i) => (
