@@ -1,0 +1,1 @@
+import{j as n}from"./index-B3MCIRK7.js";function e(){return n.jsx("div",{className:"container shop-page",children:n.jsxs("main",{className:"shop-content",children:[n.jsx("h1",{children:"Coming Soon!"}),n.jsx("p",{children:"The merchandise shop is currently under construction. Check back soon for updates!"})]})})}export{e as default};
