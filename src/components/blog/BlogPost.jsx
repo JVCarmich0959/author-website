@@ -5,7 +5,7 @@ import AuthorBio from './AuthorBio'
 export default function BlogPost({ post }) {
   return (
     <article className="prose mx-auto p-4 bg-black/40 dark:bg-gray-100/20 rounded">
-      <h1>{post.title}</h1>
+      <h1 className="text-3xl font-display mb-2">{post.title}</h1>
       <p className="text-sm opacity-75">{new Date(post.date).toLocaleDateString()}</p>
       <AuthorBio />
       <ReactMarkdown>{post.body}</ReactMarkdown>

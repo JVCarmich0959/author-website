@@ -13,6 +13,7 @@ const sections = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('home');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,6 +43,23 @@ export default function Nav() {
     }
   }, [location, scrollTo]);
 
+  useEffect(() => {
+    const handler = () => {
+      const offset = window.innerHeight * 0.3;
+      let current = 'home';
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY + offset >= el.offsetTop) {
+          current = id;
+        }
+      });
+      setActive(current);
+    };
+    handler();
+    window.addEventListener('scroll', handler);
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
   return (
     <nav className="nav">
       <div
@@ -66,7 +84,12 @@ export default function Nav() {
 
       <ul className={`nav__links${open ? " nav__links--open" : ""}`}>
         {sections.map(({ id, label }) => (
-          <li key={id} onClick={() => goTo(id)} role="menuitem">
+          <li
+            key={id}
+            onClick={() => goTo(id)}
+            role="menuitem"
+            className={active === id ? "active" : undefined}
+          >
             {label}
           </li>
         ))}

@@ -53,7 +53,7 @@ const Contact = () => {
   const isInView = useInView(ref, { margin: "-200px" });
 
   return (
-    <div className="contact" ref={ref}>
+    <div className="contact container mx-auto py-12" ref={ref}>
       <div className="cSection">
         <motion.form
           ref={form}
@@ -65,20 +65,27 @@ const Contact = () => {
             Let's keep in touch
           </motion.h1>
           <motion.div variants={listVariant} className="formItem">
-            <label>Name</label>
-            <input type="text" name="user_username" placeholder="John Doe" />
+            <label htmlFor="username">Name</label>
+            <input
+              id="username"
+              type="text"
+              name="user_username"
+              placeholder="John Doe"
+            />
           </motion.div>
           <motion.div variants={listVariant} className="formItem">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
               name="user_email"
               placeholder="john@gmail.com"
             />
           </motion.div>
           <motion.div variants={listVariant} className="formItem">
-            <label>Message</label>
+            <label htmlFor="message">Message</label>
             <textarea
+              id="message"
               rows={10}
               name="user_message"
               placeholder="Write your message..."
