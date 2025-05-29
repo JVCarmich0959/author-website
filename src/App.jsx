@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import SEO from './components/utility/SEO'
 import LazyLoad from "react-lazyload";
 
