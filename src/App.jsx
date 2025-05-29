@@ -30,7 +30,7 @@ const App = () => (
       <LazyLoad height="600vh" offset={-100}>
         <section id="about">
           <About
-            headshot="/p1.png"
+            headshot="/aboutme.jpg"
             bio={[
               'Melissa is an author, reader, and novelist. Melissa’s love of writing grew out of her passion for reading, with her tastes leaning towards urban fantasy.',
               'She is the Author of <i>Raven’s Transformation</i>, an Urban Fantasy short story featured in Abaculus III, a collection of international tales of science fiction, fantasy, and horror.',
