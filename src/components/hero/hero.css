@@ -197,6 +197,9 @@
   color: var(--antique-gold);
   transition: color 0.2s;
 }
+.nav__links li:hover {
+  color: var(--blood-red);
+}
 
 .nav__toggle {
   display: none;
