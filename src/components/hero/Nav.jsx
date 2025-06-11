@@ -1,11 +1,9 @@
 // src/components/hero/Nav.jsx
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import ThemeToggle from "../utility/ThemeToggle";
 import "./hero.css";
 
-// [COMMENT] Define the sections for internal navigation
 const sections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
@@ -13,19 +11,31 @@ const sections = [
 ];
 
 export default function Nav() {
-  const [open, setOpen] = useState(false); // [COMMENT] Tracks whether the mobile menu is expanded
+  const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const navigate = useNavigate();
   const location = useLocation();
+  const navRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
 
-  // [COMMENT] Smoothly scrolls to the given section ID if it exists on the page
   const scrollTo = useCallback((id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      const headerOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   }, []);
 
-  // [COMMENT] Either navigate to homepage hash or scroll there if already on the homepage
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+  }, []);
+
   const goTo = useCallback(
     (id) => {
       if (location.pathname !== "/") {
@@ -33,82 +43,163 @@ export default function Nav() {
       } else {
         scrollTo(id);
       }
-      setOpen(false); // [COMMENT] Closes the mobile nav menu after navigation
+      closeMenu();
     },
-    [location.pathname, navigate, scrollTo]
+    [location.pathname, navigate, scrollTo, closeMenu]
   );
 
-  // [COMMENT] On load or route change, check if there's a hash in the URL and scroll to it
+  const handleKeyDown = useCallback((e, action) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      action();
+    }
+    if (e.key === "Escape" && open) {
+      closeMenu();
+    }
+  }, [open, closeMenu]);
+
+  const handleClickOutside = useCallback((event) => {
+    if (navRef.current && !navRef.current.contains(event.target) && open) {
+      closeMenu();
+    }
+  }, [open, closeMenu]);
+
+  const updateActiveSection = useCallback(() => {
+    const scrollPosition = window.scrollY + 100;
+    
+    for (const section of sections) {
+      const element = document.getElementById(section.id);
+      if (element) {
+        const { offsetTop, offsetHeight } = element;
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          setActiveSection(section.id);
+          break;
+        }
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const hash = location.hash.slice(1);
     if (hash) {
-      setTimeout(() => scrollTo(hash), 50);
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = setTimeout(() => scrollTo(hash), 100);
     }
+    
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, [location, scrollTo]);
 
+  useEffect(() => {
+    if (location.pathname === "/") {
+      window.addEventListener("scroll", updateActiveSection, { passive: true });
+      updateActiveSection();
+      
+      return () => {
+        window.removeEventListener("scroll", updateActiveSection);
+      };
+    }
+  }, [location.pathname, updateActiveSection]);
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden";
+      
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.body.style.overflow = "unset";
+      };
+    }
+  }, [open, handleClickOutside]);
+
+  const toggleMenu = useCallback(() => {
+    setOpen(prevOpen => !prevOpen);
+  }, []);
+
+  const menuButtonProps = useMemo(() => ({
+    className: `nav__toggle${open ? " nav__toggle--open" : ""}`,
+    onClick: toggleMenu,
+    "aria-label": open ? "Close navigation menu" : "Open navigation menu",
+    "aria-expanded": open,
+    "aria-controls": "nav-links",
+    "aria-haspopup": "true"
+  }), [open, toggleMenu]);
+
+  const navLinksProps = useMemo(() => ({
+    id: "nav-links",
+    className: `nav__links${open ? " nav__links--open" : ""}`,
+    role: "menubar",
+    "aria-hidden": !open
+  }), [open]);
+
   return (
-    <nav className="nav" role="navigation" aria-label="Primary Navigation">
-      {/* [COMMENT] Logo acts as a home button with appropriate ARIA role */}
+    <nav 
+      className="nav" 
+      role="navigation" 
+      aria-label="Primary Navigation"
+      ref={navRef}
+    >
       <div
         className="nav__logo"
         onClick={() => goTo("home")}
         role="button"
-        tabIndex={0} // [COMMENT] Makes div focusable for keyboard navigation
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") goTo("home");
-        }}
+        tabIndex={0}
+        onKeyDown={(e) => handleKeyDown(e, () => goTo("home"))}
         aria-label="Navigate to Home section"
       >
         Melissa Michaels
       </div>
 
-      {/* [COMMENT] Mobile menu toggle button */}
-      <button
-        className={`nav__toggle${open ? " nav__toggle--open" : ""}`}
-        onClick={() => setOpen(!open)}
-        aria-label={open ? "Close menu" : "Open menu"}
-        aria-expanded={open}
-        aria-controls="nav-links"
-      >
-        <span />
-        <span />
-        <span />
+      <button {...menuButtonProps}>
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
       </button>
 
-      {/* [COMMENT] Main navigation links with role="menubar" for screen readers */}
-      <ul
-        id="nav-links"
-        className={`nav__links${open ? " nav__links--open" : ""}`}
-        role="menubar"
-      >
-        {sections.map(({ id, label }) => (
-          <li
-            key={id}
-            onClick={() => goTo(id)}
-            role="menuitem"
-            tabIndex={0} // [COMMENT] Allows focus on each nav item
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") goTo(id);
-            }}
-            aria-label={`Navigate to ${label} section`}
-          >
-            {label}
-          </li>
-        ))}
+      <ul {...navLinksProps}>
+        {sections.map(({ id, label }) => {
+          const isActive = activeSection === id && location.pathname === "/";
+          
+          return (
+            <li
+              key={id}
+              onClick={() => goTo(id)}
+              role="menuitem"
+              tabIndex={open ? 0 : -1}
+              onKeyDown={(e) => handleKeyDown(e, () => goTo(id))}
+              aria-label={`Navigate to ${label} section`}
+              className={isActive ? "nav__link--active" : ""}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {label}
+            </li>
+          );
+        })}
 
-        {/* [COMMENT] External blog route (uses Link instead of scroll) */}
         <li
           role="menuitem"
-          tabIndex={0}
-          onClick={() => setOpen(false)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") setOpen(false);
-          }}
+          tabIndex={open ? 0 : -1}
+          onClick={closeMenu}
+          onKeyDown={(e) => handleKeyDown(e, closeMenu)}
           aria-label="Navigate to Blog page"
+          className={location.pathname === "/blog" ? "nav__link--active" : ""}
+          aria-current={location.pathname === "/blog" ? "page" : undefined}
         >
-          <Link to="/blog">Blog</Link>
+          <Link to="/blog" onClick={closeMenu}>Blog</Link>
         </li>
       </ul>
+
+      {open && (
+        <div 
+          className="nav__overlay" 
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
     </nav>
   );
 }
