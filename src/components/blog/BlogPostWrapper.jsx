@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import posts from '../../../data/posts.js';
+import posts from '../../data/posts.js';
 import BlogPost from './BlogPost';
 import SEO from '../utility/SEO';
 
