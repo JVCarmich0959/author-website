@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PostPreview from './PostPreview';
 import SearchBar from '../utility/SearchBar';
 import Pagination from '../utility/Pagination';
-import posts from "../../data/posts";
+import posts from "../../data/posts.js";
 import { debounce } from 'lodash';
 
 export default function AuthorBlogPage() {
