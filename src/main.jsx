@@ -6,7 +6,7 @@ import './index.css'
 import App from './App.jsx'
 import Layout from './components/Layout.jsx'
 // const Shop = lazy(() => import('./pages/Shop.jsx')) // Uncomment when ready
-// const Blog = lazy(() => import('./pages/Blog.jsx')) // Uncomment when ready
+const Blog = lazy(() => import('./pages/Blog.jsx'))
 const Post = lazy(() => import('./pages/Post.jsx'))
 
 createRoot(document.getElementById('root')).render(
@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
             <Route index element={<App />} />
             {/* Optional routes */}
             {/* <Route path="shop" element={<Shop />} /> */}
-            {/* <Route path="blog" element={<Blog />} /> */}
+            <Route path="blog" element={<Blog />} />
             <Route path="post/:id" element={<Post />} />
           </Route>
         </Routes>
