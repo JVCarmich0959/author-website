@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
             {/* Optional routes */}
             {/* <Route path="shop" element={<Shop />} /> */}
             {/* <Route path="blog" element={<Blog />} /> */}
-            <Route path="post/:id" element={<Post />} />
+            <Route path="post/:slug" element={<Post />} />
           </Route>
         </Routes>
       </Suspense>
