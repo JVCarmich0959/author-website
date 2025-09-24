@@ -16,7 +16,7 @@ export default function NewsletterModal({ href = "#contact" }) {
   const dismissedAt = parseInt(localStorage.getItem("newsletterDismissed"), 10);
   const subscribed = localStorage.getItem("newsletterSubscribed") === "true";
 
-  const sevenDays = 1
+  const sevenDays = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   // Only show popup if not subscribed and not dismissed recently
   if (subscribed || (dismissedAt && Date.now() - dismissedAt < sevenDays)) return;
@@ -89,18 +89,19 @@ export default function NewsletterModal({ href = "#contact" }) {
 };
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className={`newsletter-popup ${isExpanded ? 'newsletter-popup-expanded' : ''}`}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 100 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Newsletter sign-up"
-        >
+    <>
+      <AnimatePresence>
+        {visible && (
+          <motion.div
+            className={`newsletter-popup ${isExpanded ? 'newsletter-popup-expanded' : ''}`}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ type: "spring", stiffness: 100 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Newsletter sign-up"
+          >
           <div className="newsletter-content">
             {!isExpanded ? (
               // Initial popup content
@@ -207,32 +208,34 @@ export default function NewsletterModal({ href = "#contact" }) {
         </motion.div>
       )}
     </AnimatePresence>
+    {import.meta.env.DEV && (
+      <div style={{ position: 'fixed', bottom: '10px', left: '10px', zIndex: 9999 }}>
+        <button
+          onClick={() => {
+            localStorage.removeItem("newsletterDismissed");
+            localStorage.removeItem("newsletterSubscribed");
+            alert("Newsletter state reset. Scroll again to trigger popup.");
+          }}
+          style={{
+            background: "#1B0C00",
+            color: "#CDB48B",
+            border: "1px solid #8C5431",
+            borderRadius: "4px",
+            padding: "6px 12px",
+            fontSize: "12px",
+            cursor: "pointer",
+            opacity: 0.6
+          }}
+        >
+          🧪 Reset Newsletter State
+        </button>
+      </div>
+    )}
+    </>
+
 
   
 
     
   );
 }
-{import.meta.env.DEV && (
-  <div style={{ position: 'fixed', bottom: '10px', left: '10px', zIndex: 9999 }}>
-    <button
-      onClick={() => {
-        localStorage.removeItem("newsletterDismissed");
-        localStorage.removeItem("newsletterSubscribed");
-        alert("Newsletter state reset. Scroll again to trigger popup.");
-      }}
-      style={{
-        background: "#1B0C00",
-        color: "#CDB48B",
-        border: "1px solid #8C5431",
-        borderRadius: "4px",
-        padding: "6px 12px",
-        fontSize: "12px",
-        cursor: "pointer",
-        opacity: 0.6
-      }}
-    >
-      🧪 Reset Newsletter State
-    </button>
-  </div>
-)}
