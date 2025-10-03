@@ -63,9 +63,9 @@ export default function About({ headshot, bio = [], blurb, socialLinks = {} }) {
 
   // Default social links with customization support
   const defaultSocialLinks = {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    twitter: "https://twitter.com",
+    instagram: "https://instagram.com/melissamichaelswrites",
+    facebook: "https://facebook.com/MelissaMichaelsAuthor",
+    twitter: "https://twitter.com/melissawrites",
     ...socialLinks
   };
 
@@ -147,7 +147,7 @@ export default function About({ headshot, bio = [], blurb, socialLinks = {} }) {
             variants={linkVariants}
             whileHover="hover"
             whileTap="tap"
-            aria-label="Visit Instagram profile"
+              aria-label="Visit Melissa's Instagram profile"
           >
             <img src="/instagram.png" alt="Instagram" />
           </motion.a>
@@ -161,7 +161,7 @@ export default function About({ headshot, bio = [], blurb, socialLinks = {} }) {
             variants={linkVariants}
             whileHover="hover"
             whileTap="tap"
-            aria-label="Visit Facebook profile"
+              aria-label="Visit Melissa's Facebook profile"
           >
             <img src="/facebook.png" alt="Facebook" />
           </motion.a>
@@ -176,7 +176,7 @@ export default function About({ headshot, bio = [], blurb, socialLinks = {} }) {
             variants={linkVariants}
             whileHover="hover"
             whileTap="tap"
-            aria-label="Visit Twitter profile"
+              aria-label="Visit Melissa's Twitter profile"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

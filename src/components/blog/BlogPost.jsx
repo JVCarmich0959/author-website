@@ -18,6 +18,7 @@ export default function BlogPost({ post }) {
           href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on Twitter"
         >
           Twitter
         </a>
@@ -25,6 +26,7 @@ export default function BlogPost({ post }) {
           href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on Facebook"
         >
           Facebook
         </a>
@@ -32,6 +34,7 @@ export default function BlogPost({ post }) {
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
         >
           LinkedIn
         </a>
