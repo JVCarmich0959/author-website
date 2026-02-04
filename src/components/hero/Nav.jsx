@@ -8,7 +8,6 @@ const sections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "services", label: "Preview" },
-  {id: "blog", label: "Blog", isRoute: true }, //Added blog section with route flag
 ];
 
 export default function Nav() {
@@ -77,7 +76,7 @@ export default function Nav() {
       const element = document.getElementById(section.id);
       if (element) {
         const { offsetTop, offsetHeight } = element;
-        if (scrollPosition >= offsetTop && scrollPosition < offsetPosition + offsetHeight) {
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
           setActiveSection(section.id);
           break;
         }
