@@ -12,6 +12,7 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
 ## Project Structure
 
 - `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
+- `src/experience` – chapter-based scrollytelling experience with data, components, and hooks
 - `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
 
 ## Getting Started
@@ -52,6 +53,7 @@ VITE_PUBLIC_KEY=your_public_key
 - Interactive 3D models for signed books, Patreon exclusives and newsletter perks
 - "About the Author" section describing Melissa and her writing journey
 - Newsletter sign‑up form powered by EmailJS
+- `/experience` route featuring a chaptered narrative with insight hotspots and a lightweight 3D backdrop
 - Video gallery showcasing book trailers and interviews
 
 The codebase is intentionally minimal to keep the focus on promoting **The Bloodborne Chronicles**. Feel free to adapt it for your own author site or book series.
@@ -87,3 +89,10 @@ the `/blog` page and can be viewed individually at `/blog/<slug>`.
 
 New posts are automatically included the next time the app runs.
 
+## Experience Page
+
+Visit `/experience` to view the scroll-driven narrative experience. Chapters and insight snippets live in:
+
+- `src/experience/data/chapters.js`
+
+Each chapter entry includes its number, title, body copy, visual state (lighting/camera hints), and insight snippet. Adjust this file to change the story flow or update the collectible insights.
