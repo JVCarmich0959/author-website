@@ -7,12 +7,19 @@
 }
 
 html.experience-active {
-  scroll-snap-type: none;
+  height: 100%;
 }
 
-html.experience-active section {
-  height: auto;
-  scroll-snap-align: unset;
+html.experience-active body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.scrolly-shell {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 2rem;
 }
 
 .experience-track {
@@ -22,6 +29,11 @@ html.experience-active section {
   flex-direction: column;
   gap: clamp(3rem, 8vw, 6rem);
   padding: clamp(6rem, 12vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.scrolly-chapter {
+  min-height: 100vh;
+  scroll-snap-align: start;
 }
 
 .experience-chapter {
@@ -96,6 +108,46 @@ html.experience-active section {
   position: fixed;
   inset: 0;
   background: radial-gradient(circle at top, rgba(9, 12, 18, 0.7), rgba(1, 2, 4, 0.9));
+}
+
+.experience-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 3, 6, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+}
+
+.experience-gate__panel {
+  max-width: 520px;
+  background: rgba(10, 12, 18, 0.95);
+  border-radius: 18px;
+  padding: 2rem;
+  border: 1px solid rgba(205, 180, 139, 0.2);
+  display: grid;
+  gap: 1rem;
+  text-align: left;
+}
+
+.experience-gate__kicker {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.experience-gate__enter {
+  border-radius: 999px;
+  border: 1px solid rgba(185, 33, 29, 0.6);
+  background: rgba(185, 33, 29, 0.3);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .experience-overlay {
@@ -239,6 +291,10 @@ html.experience-active section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .scrolly-shell {
+    scroll-behavior: auto;
+  }
+
   .experience-chapter {
     opacity: 1;
     transform: none;

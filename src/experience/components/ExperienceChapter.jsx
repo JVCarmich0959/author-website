@@ -40,7 +40,7 @@ export default function ExperienceChapter({
     <section
       id={chapter.id}
       ref={sectionRef}
-      className={`experience-chapter${isVisible ? " is-visible" : ""}`}
+      className={`experience-chapter scrolly-chapter${isVisible ? " is-visible" : ""}`}
       aria-labelledby={`${chapter.id}-title`}
       data-visual={chapter.id}
     >

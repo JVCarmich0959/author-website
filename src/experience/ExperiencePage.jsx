@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import SEO from "../components/utility/SEO";
 import chapters from "./data/chapters";
+import ExperienceGate from "./components/ExperienceGate";
 import ExperienceOverlay from "./components/ExperienceOverlay";
 import ExperienceChapter from "./components/ExperienceChapter";
 import ExperienceModal from "./components/ExperienceModal";
@@ -15,6 +16,7 @@ export default function ExperiencePage() {
   const prefersReducedMotion = useReducedMotion();
   const [authorNoteOpen, setAuthorNoteOpen] = useState(false);
   const [activeInsight, setActiveInsight] = useState(null);
+  const [hasEntered, setHasEntered] = useState(false);
 
   const chapterIds = useMemo(() => chapters.map((chapter) => chapter.id), []);
   const activeChapterId = useActiveChapter(chapterIds);
@@ -41,32 +43,41 @@ export default function ExperiencePage() {
   };
 
   return (
-    <main className="experience-page">
+    <main className="experience-page scrolly-shell">
       <SEO title="Experience | Melissa Michaels" description="Interactive author experience" />
-      <Suspense fallback={<div className="experience-scene__fallback" aria-hidden="true" />}>
-        <ExperienceScene visualState={activeChapter.visualState} reducedMotion={prefersReducedMotion} />
-      </Suspense>
+      <ExperienceGate isOpen={!hasEntered} onEnter={() => setHasEntered(true)} />
 
-      <ExperienceOverlay
-        chapters={chapters}
-        activeId={activeChapterId}
-        onNavigate={handleNavigate}
-        onOpenNote={() => setAuthorNoteOpen(true)}
-        insightsFound={foundCount}
-        insightsTotal={chapters.length}
-      />
+      {hasEntered && (
+        <>
+          <Suspense fallback={<div className="experience-scene__fallback" aria-hidden="true" />}>
+            <ExperienceScene
+              visualState={activeChapter.visualState}
+              reducedMotion={prefersReducedMotion}
+            />
+          </Suspense>
 
-      <div className="experience-track">
-        {chapters.map((chapter) => (
-          <ExperienceChapter
-            key={chapter.id}
-            chapter={chapter}
-            isFound={foundSet.has(chapter.insight.id)}
-            onOpenInsight={handleOpenInsight}
-            reducedMotion={prefersReducedMotion}
+          <ExperienceOverlay
+            chapters={chapters}
+            activeId={activeChapterId}
+            onNavigate={handleNavigate}
+            onOpenNote={() => setAuthorNoteOpen(true)}
+            insightsFound={foundCount}
+            insightsTotal={chapters.length}
           />
-        ))}
-      </div>
+
+          <div className="experience-track scrolly-track">
+            {chapters.map((chapter) => (
+              <ExperienceChapter
+                key={chapter.id}
+                chapter={chapter}
+                isFound={foundSet.has(chapter.insight.id)}
+                onOpenInsight={handleOpenInsight}
+                reducedMotion={prefersReducedMotion}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
       <ExperienceModal
         isOpen={authorNoteOpen}
