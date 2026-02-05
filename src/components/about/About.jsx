@@ -127,6 +127,8 @@ const SocialIcons = {
  * @returns {JSX.Element} A motion-enhanced section element displaying the author's details.
  */
 export default function About({ 
+  as: Wrapper = "section",
+  id = "about",
   headshot, 
   bio = [], 
   blurb, 
@@ -190,14 +192,16 @@ export default function About({
     );
   }, [variants.link, authorName]);
 
+  const wrapperProps = {
+    className: "about",
+    ref,
+    "aria-labelledby": "about-title",
+    role: "region",
+    ...(id ? { id } : {}),
+  };
+
   return (
-    <section
-      id="about"
-      className="about"
-      ref={ref}
-      aria-labelledby="about-title"
-      role="region"
-    >
+    <Wrapper {...wrapperProps}>
       <motion.div
         className="about_progress"
         style={{ scaleX: progress }}
@@ -276,6 +280,6 @@ export default function About({
         {renderSocialLink('Facebook', processedSocialLinks.facebook, SocialIcons.Facebook)}
         {renderSocialLink('Twitter', processedSocialLinks.twitter, SocialIcons.Twitter)}
       </motion.nav>
-    </section>
+    </Wrapper>
   );
 }
