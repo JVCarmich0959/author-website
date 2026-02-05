@@ -16,9 +16,7 @@
   box-sizing: border-box;
 }
 
-/* smooth full-page scroll on sections */
 html {
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   background: var(--color-black);
   color: var(--color-antique-gold);
@@ -55,12 +53,6 @@ a:focus {
   max-width: 1536px;
   padding: 0 1rem;
   margin: 0 auto;
-}
-
-/* each <section> fills viewport & snaps */
-section {
-  height: 100vh;
-  scroll-snap-align: center;
 }
 
 /* headings get a heavier gothic heft */
