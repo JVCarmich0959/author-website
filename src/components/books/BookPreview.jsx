@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import BookModelContainer from "./computer/BookModelContainer";
 import "./book-preview.css";
 
-export default function BookPreview() {
+export default function BookPreview({ as: Wrapper = "section", id }) {
   const [showModal, setShowModal] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
 
@@ -66,7 +66,11 @@ export default function BookPreview() {
 
   return (
     <>
-      <section className="book-preview" aria-label="Book preview section">
+      <Wrapper
+        className="book-preview"
+        aria-label="Book preview section"
+        {...(id ? { id } : {})}
+      >
         <div className="preview-content">
           <div className="book-model-wrapper">
             <BookModelContainer onLoad={() => setModelLoaded(true)} />
@@ -89,7 +93,7 @@ export default function BookPreview() {
             </button>
           </div>
         </div>
-      </section>
+      </Wrapper>
 
       {showModal &&
         createPortal(

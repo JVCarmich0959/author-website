@@ -1,13 +1,46 @@
 /* index.css — Global Gothic Theme */
 
+@import "./styles/scrollytelling.css";
+
 :root {
-  /* pull in the same palette for global use */
+  /* Design tokens */
+  --color-base-950: #050607;
+  --color-base-900: #0d1014;
+  --color-base-800: #1d1f25;
+  --color-base-100: #f4f1ea;
+  --color-base-0: #ffffff;
+  --color-accent: #b9211d;
+  --color-accent-soft: rgba(185, 33, 29, 0.18);
+  --color-glow: rgba(185, 33, 29, 0.45);
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4.5rem;
+
+  --type-xs: 0.75rem;
+  --type-sm: 0.9rem;
+  --type-md: 1rem;
+  --type-lg: 1.25rem;
+  --type-xl: 1.6rem;
+  --type-2xl: 2.4rem;
+  --type-3xl: 3.2rem;
+
+  --font-display: "Cinzel Decorative", serif;
+  --font-body: "Inter", "Cinzel Decorative", serif;
+
+  /* Legacy palette compatibility */
   --color-black: #010800;
-  --color-burgundy: #1B0C00;
+  --color-burgundy: #1b0c00;
   --color-chocolate: #351304;
-  --color-russet: #8C5431;
-  --color-blood-red: #B9211D;
-  --color-antique-gold: #CDB48B;
+  --color-russet: #8c5431;
+  --color-blood-red: #b9211d;
+  --color-antique-gold: #cdb48b;
+  --blood-red: var(--color-accent);
+  --antique-gold: var(--color-base-100);
 }
 
 * {
@@ -18,21 +51,14 @@
 
 /* smooth full-page scroll on sections */
 html {
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  background: var(--color-black);
-  color: var(--color-antique-gold);
-  font-family: "Cinzel Decorative", serif;
+  background: var(--color-base-950);
+  color: var(--color-base-100);
+  font-family: var(--font-body);
 }
 
 body {
-  /* subtle burgundy → black fade */
-  background: linear-gradient(
-    180deg,
-    var(--color-black) 0%,
-    var(--color-burgundy) 60%,
-    var(--color-black) 100%
-  );
+  background: radial-gradient(circle at top, rgba(12, 14, 20, 0.9), var(--color-base-950));
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -45,8 +71,8 @@ a {
 }
 a:hover,
 a:focus {
-  color: var(--color-blood-red);
-  text-shadow: 0 0 6px rgba(185,33,29,0.7);
+  color: var(--color-accent);
+  text-shadow: 0 0 12px var(--color-glow);
   filter: brightness(1.2);
 }
 
@@ -57,23 +83,17 @@ a:focus {
   margin: 0 auto;
 }
 
-/* each <section> fills viewport & snaps */
-section {
-  height: 100vh;
-  scroll-snap-align: center;
-}
-
 /* headings get a heavier gothic heft */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Cinzel Decorative", serif;
-  color: var(--color-blood-red);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.75);
 }
 
 /* paragraphs and lists in softer antique gold */
 p, li {
-  color: var(--color-antique-gold);
-  line-height: 1.6;
+  color: var(--color-base-100);
+  line-height: 1.7;
 }
 
 /* responsive container widths */
@@ -109,7 +129,7 @@ p, li {
   width: auto;
   height: auto;
   padding: 0.5rem 1rem;
-  background: var(--color-blood-red);
+  background: var(--color-accent);
   color: #fff;
   z-index: 1000;
   text-decoration: none;
@@ -117,8 +137,8 @@ p, li {
 
 /* Global focus style */
 :focus-visible {
-  outline: 2px dashed var(--color-blood-red);
-  outline-offset: 2px;
+  outline: 2px dashed var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* Footer styles */
@@ -131,14 +151,12 @@ p, li {
 
 /* Light theme overrides */
 html.light {
-  --color-black: #ffffff;
-  --color-burgundy: #f3f3f3;
-  --color-chocolate: #333333;
-  --color-russet: #666666;
-  --color-blood-red: #8b0000;
-  --color-antique-gold: #333333;
-  background: var(--color-black);
-  color: var(--color-chocolate);
+  --color-base-950: #f6f6f6;
+  --color-base-900: #ffffff;
+  --color-base-100: #1d1f25;
+  --color-accent: #8b0000;
+  background: var(--color-base-900);
+  color: var(--color-base-100);
 }
 html.light body {
   background: #ffffff;

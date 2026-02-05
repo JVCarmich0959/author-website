@@ -30,7 +30,7 @@ const ScrollIcon = () => (
   </svg>
 );
 
-export default function Hero() {
+export default function Hero({ as: Wrapper = "section", id = "home" }) {
   const prefersReducedMotion = useReducedMotion();
   
   const scrollToTop = useCallback(() => {
@@ -102,9 +102,14 @@ export default function Hero() {
     tap: prefersReducedMotion ? {} : { scale: 0.95 }
   }), [prefersReducedMotion]);
 
+  const wrapperProps = {
+    className: "hero",
+    ...(id ? { id } : {}),
+  };
+
   return (
     <>
-      <section id="home" className="hero">
+      <Wrapper {...wrapperProps}>
         <header className="hSection left">
           <motion.h1
             {...titleVariants}
@@ -191,7 +196,7 @@ export default function Hero() {
             <path d="M20 30V10M10 20l10-10 10 10" />
           </svg>
         </motion.button>
-      </section>
+      </Wrapper>
 
       <NewsletterModal />
     </>
