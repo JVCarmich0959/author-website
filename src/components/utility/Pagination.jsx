@@ -1,20 +1,29 @@
-import React from 'react'
+import React from 'react';
 
-export default function Pagination({ page, totalPages, onPageChange }) {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
+export default function Pagination({ currentPage, totalPages, onPageChange, className = '' }) {
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+
   return (
-    <nav className="flex justify-center gap-2 mt-8" aria-label="Pagination">
-      {pages.map((p) => (
-        <button
-          key={p}
-          onClick={() => onPageChange(p)}
-          className={`px-3 py-1 rounded ${
-            p === page ? 'bg-red-800 text-white' : 'bg-black/50'
-          }`}
-        >
-          {p}
-        </button>
-      ))}
+    <nav className={`flex justify-center gap-2 ${className}`.trim()} aria-label="Pagination">
+      {pages.map((pageNumber) => {
+        const isCurrent = pageNumber === currentPage;
+
+        return (
+          <button
+            key={pageNumber}
+            type="button"
+            onClick={() => onPageChange(pageNumber)}
+            aria-current={isCurrent ? 'page' : undefined}
+            className={`px-3 py-1 rounded-md border transition-colors ${
+              isCurrent
+                ? 'blog-button border-red-700'
+                : 'blog-button--ghost border-[rgba(205,180,139,0.35)] hover:bg-[rgba(205,180,139,0.22)]'
+            }`}
+          >
+            {pageNumber}
+          </button>
+        );
+      })}
     </nav>
-  )
+  );
 }

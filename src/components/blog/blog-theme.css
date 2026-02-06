@@ -1,0 +1,161 @@
+/* blog-theme.css — align blog UI with your gothic palette */
+
+.blog-shell {
+  color: var(--color-antique-gold);
+}
+
+.blog-surface {
+  background: rgba(2, 4, 8, 0.65);
+  border: 1px solid rgba(205, 180, 139, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.blog-title {
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-blood-red);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
+}
+
+.blog-meta {
+  color: rgba(205, 180, 139, 0.75);
+  font-size: 0.95rem;
+}
+
+.blog-muted {
+  color: rgba(205, 180, 139, 0.75);
+}
+
+.blog-divider {
+  border-top: 1px solid rgba(205, 180, 139, 0.16);
+}
+
+.blog-progress-track {
+  background: rgba(205, 180, 139, 0.14);
+}
+
+.blog-progress-bar {
+  background: linear-gradient(90deg, var(--color-blood-red), var(--color-antique-gold));
+}
+
+.blog-btn {
+  border: 1px solid rgba(205, 180, 139, 0.22);
+  background: rgba(2, 4, 8, 0.55);
+  color: var(--color-antique-gold);
+  border-radius: 12px;
+  padding: 0.5rem 0.9rem;
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.blog-btn:hover {
+  border-color: rgba(185, 33, 29, 0.55);
+  transform: translateY(-1px);
+}
+
+.blog-btn--primary {
+  border-color: rgba(185, 33, 29, 0.6);
+  background: rgba(185, 33, 29, 0.2);
+  color: #fff;
+}
+
+.blog-btn--liked {
+  border-color: rgba(185, 33, 29, 0.7);
+  background: rgba(185, 33, 29, 0.25);
+  color: #fff;
+}
+
+.blog-chip {
+  border: 1px solid rgba(205, 180, 139, 0.22);
+  background: rgba(2, 4, 8, 0.5);
+  color: var(--color-antique-gold);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.8rem;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.blog-chip:hover {
+  border-color: rgba(185, 33, 29, 0.55);
+  background: rgba(185, 33, 29, 0.12);
+}
+
+.blog-menu {
+  background: rgba(10, 12, 18, 0.95);
+  border: 1px solid rgba(205, 180, 139, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+}
+
+.blog-menu a,
+.blog-menu button {
+  color: var(--color-antique-gold);
+}
+
+.blog-menu a:hover,
+.blog-menu button:hover {
+  background: rgba(185, 33, 29, 0.12);
+}
+
+/* Markdown styling (avoids tailwind "prose" dependency) */
+.blog-prose {
+  line-height: 1.75;
+  color: rgba(205, 180, 139, 0.92);
+}
+
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3 {
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-antique-gold);
+  margin-top: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-prose h1 {
+  font-size: 1.6rem;
+}
+
+.blog-prose h2 {
+  font-size: 1.3rem;
+}
+
+.blog-prose h3 {
+  font-size: 1.1rem;
+}
+
+.blog-prose p {
+  margin: 0.9rem 0;
+}
+
+.blog-prose a {
+  color: var(--color-antique-gold);
+  text-decoration: underline;
+  text-decoration-color: rgba(185, 33, 29, 0.45);
+  text-underline-offset: 3px;
+}
+
+.blog-prose blockquote {
+  border-left: 3px solid rgba(185, 33, 29, 0.65);
+  padding: 0.75rem 1rem;
+  margin: 1.2rem 0;
+  background: rgba(185, 33, 29, 0.08);
+  border-radius: 12px;
+  font-style: italic;
+}
+
+.blog-prose code {
+  background: rgba(2, 4, 8, 0.7);
+  border: 1px solid rgba(205, 180, 139, 0.14);
+  padding: 0.1rem 0.35rem;
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+.blog-prose pre {
+  background: rgba(2, 4, 8, 0.7);
+  border: 1px solid rgba(205, 180, 139, 0.14);
+  padding: 1rem;
+  border-radius: 14px;
+  overflow-x: auto;
+}
