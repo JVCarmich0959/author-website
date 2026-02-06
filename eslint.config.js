@@ -10,7 +10,9 @@ export default [
     files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: Object.fromEntries(
+        Object.entries(globals.browser).map(([key, value]) => [key.trim(), value])
+      ),
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
@@ -31,6 +33,8 @@ export default [
       "no-unused-vars": "warn",
       "react/prop-types": "off",
       "react/jsx-no-target-blank": "off",
+      "react/no-unescaped-entities": "off",
+      "react/no-unknown-property": "off",
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },

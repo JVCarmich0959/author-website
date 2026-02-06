@@ -49,7 +49,6 @@
   box-sizing: border-box;
 }
 
-/* smooth full-page scroll on sections */
 html {
   scroll-behavior: smooth;
   background: var(--color-base-950);
