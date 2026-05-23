@@ -1,19 +1,21 @@
 # Urban Fantasy Author Website
 
-This project powers the online presence of **Melissa Michaels**, author of *Raven's Revenge* and the growing **Bloodborne Chronicles** series. It is a Vite powered React front end that showcases her books, shares author updates and collects newsletter sign‑ups.
+This project powers the online presence of **Melissa Michaels**, author of *Raven's Revenge* and the growing **Bloodborne Chronicles** series. It is a Vite + React front end that showcases her books, hosts the blog, and collects newsletter subscriptions.
 
 ## Key Technologies
 
-- **React + Vite** – component‑driven UI with hot module reloading
-- **Tailwind CSS** – utility‑first styling
+- **React + Vite** – component-driven UI with hot module reloading
+- **Tailwind CSS** – utility-first styling
 - **React Three Fiber** – 3D book and merchandise models
-- **EmailJS** – sends contact and newsletter forms (requires `VITE_SERVICE_ID`, `VITE_TEMPLATE_ID`, and `VITE_PUBLIC_KEY`)
+- **Supabase** – Postgres database for blog posts and newsletter subscribers
+- **EmailJS** – sends the bottom contact form (separate from the newsletter)
 
 ## Project Structure
 
-- `src/components` – React components for the hero, about section, services (book models, Patreon links), and newsletter form
-- `src/experience` – chapter-based scrollytelling experience with data, components, and hooks
-- `public` – static assets such as the *Raven's Revenge* cover, 3D model files and icons
+- `src/components` – React components for hero, about, books, blog, newsletter, footer
+- `src/experience` – chapter-based scrollytelling experience
+- `src/lib/supabase.js` – Supabase client and row mappers
+- `public` – static assets (book covers, 3D models, icons)
 
 ## Getting Started
 
@@ -21,12 +23,11 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    ```bash
    npm install
    ```
-2. Copy `.env.example` to `.env` and fill in your EmailJS credentials
-3. Start the Vite dev server
+2. Copy `.env.example` to `.env` and fill in the values (see **Environment Variables** below).
+3. Start the dev server
    ```bash
    npm run dev
    ```
-   This launches the React front end with hot reload.
 4. Build production assets
    ```bash
    npm run build
@@ -35,64 +36,60 @@ This project powers the online presence of **Melissa Michaels**, author of *Rave
    ```bash
    npm test
    ```
-   Runs the sample test in `src/App.test.jsx` using Vitest.
 
 ## Environment Variables
 
-Create a `.env` file based on `.env.example` and fill in your EmailJS credentials:
+```
+# EmailJS (contact form at bottom of the homepage)
+VITE_SERVICE_ID=your_emailjs_service_id
+VITE_TEMPLATE_ID=your_emailjs_template_id
+VITE_PUBLIC_KEY=your_emailjs_public_key
 
+# Supabase (blog posts + newsletter subscribers)
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
-VITE_SERVICE_ID=your_service_id
-VITE_TEMPLATE_ID=your_template_id
-VITE_PUBLIC_KEY=your_public_key
-```
+
+The Supabase URL and publishable key come from your Supabase project dashboard
+under *Project Settings → API Keys*. The publishable key is safe to ship to the
+browser — never put the `service_role` key in a `VITE_*` variable.
+
+## Database
+
+Two tables in the Supabase `public` schema:
+
+- **`subscribers`** – newsletter signups. Columns: `id`, `email` (unique, case-insensitive), `name`, `source`, `confirmed`, `confirmation_token`, `unsubscribe_token`, `created_at`, `confirmed_at`, `unsubscribed_at`.
+- **`posts`** – blog posts. Columns: `id`, `slug` (unique), `title`, `summary`, `body` (Markdown), `tags` (text[]), `featured_image`, `author`, `published_at`, `created_at`, `updated_at`.
+
+Row Level Security is enabled on both. The anon key can:
+- INSERT into `subscribers` (signup form)
+- SELECT from `posts` where `published_at` is set and in the past
+
+It cannot read the subscriber list. To export subscribers, use the Supabase dashboard or a server-side `service_role` key.
+
+## Writing a Blog Post
+
+Until there's an admin UI, post directly in Supabase Studio:
+
+1. Open *Table Editor → posts → Insert row*.
+2. Fill in `slug` (e.g. `my-post`), `title`, `body` (Markdown), `summary`, and optionally `tags`, `featured_image`.
+3. Set `published_at` to a timestamp to make it live. Leave null to keep as draft.
+
+The post appears at `/blog/<slug>` on the next page load.
 
 ## Features
 
 - Animated hero section highlighting *Raven's Revenge*
-- Interactive 3D models for signed books, Patreon exclusives and newsletter perks
-- "About the Author" section describing Melissa and her writing journey
-- Newsletter sign‑up form powered by EmailJS
+- Interactive 3D models for signed books, Patreon exclusives, and newsletter perks
+- "About the Author" section
+- Newsletter sign-up popup writes directly to Supabase
 - `/experience` route featuring a chaptered narrative with insight hotspots and a lightweight 3D backdrop
-- Video gallery showcasing book trailers and interviews
-
-The codebase is intentionally minimal to keep the focus on promoting **The Bloodborne Chronicles**. Feel free to adapt it for your own author site or book series.
+- Video gallery for book trailers and interviews
 
 ## Managing Videos
 
-Embedded videos are defined in `src/components/video/VideoGallery.jsx` inside the `videos` array.
-
-1. **Add a video** – append a new object with a unique `id` and `url` pointing to a video file or YouTube embed link.
-2. **Remove a video** – delete its object from the array.
-
-Changes are automatically reflected the next time the app is built or reloaded.
-
-## Adding Blog Posts
-
-Blog posts live in `src/posts/` as Markdown files. Each file becomes a post on
-the `/blog` page and can be viewed individually at `/blog/<slug>`.
-
-1. Create a new `.md` file inside `src/posts/`.
-2. Add a YAML front matter block with at least `title`, `date`, and `summary`.
-   Example:
-
-   ```markdown
-   ---
-   title: "My Post"
-   date: "2024-01-01"
-   summary: "A short summary"
-   ---
-   ```
-
-3. The file name becomes the post slug, e.g. `my-post.md` -> `/blog/my-post`.
-4. Write the rest of your post in standard Markdown.
-
-New posts are automatically included the next time the app runs.
+Embedded videos are defined in `src/components/video/VideoGallery.jsx` inside the `videos` array. Append/remove objects with a unique `id` and a `url`.
 
 ## Experience Page
 
-Visit `/experience` to view the scroll-driven narrative experience. Chapters and insight snippets live in:
-
-- `src/experience/data/chapters.js`
-
-Each chapter entry includes its number, title, body copy, visual state (lighting/camera hints), and insight snippet. Adjust this file to change the story flow or update the collectible insights.
+Visit `/experience` for the scroll-driven narrative. Chapters live in `src/experience/data/chapters.js`.

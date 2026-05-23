@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { supabase } from "../../lib/supabase";
 import "./hero.css";
 
 export default function NewsletterModal({ href = "#contact" }) {
@@ -13,26 +14,23 @@ export default function NewsletterModal({ href = "#contact" }) {
 
   // Scroll listener triggers when 60% down the page
   useEffect(() => {
-  const dismissedAt = parseInt(localStorage.getItem("newsletterDismissed"), 10);
-  const subscribed = localStorage.getItem("newsletterSubscribed") === "true";
+    const dismissedAt = parseInt(localStorage.getItem("newsletterDismissed"), 10);
+    const subscribed = localStorage.getItem("newsletterSubscribed") === "true";
 
-  const sevenDays = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
 
-  // Only show popup if not subscribed and not dismissed recently
-  if (subscribed || (dismissedAt && Date.now() - dismissedAt < sevenDays)) return;
+    if (subscribed || (dismissedAt && Date.now() - dismissedAt < sevenDays)) return;
 
-  const handleScroll = () => {
-    const triggerPoint = window.innerHeight * 0.6;
-    if (window.scrollY > triggerPoint && !visible) {
-      setVisible(true);
-    }
-  };
+    const handleScroll = () => {
+      const triggerPoint = window.innerHeight * 0.6;
+      if (window.scrollY > triggerPoint && !visible) {
+        setVisible(true);
+      }
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [visible]);
-
-
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [visible]);
 
   const handleSignupClick = (e) => {
     e.preventDefault();
@@ -41,38 +39,30 @@ export default function NewsletterModal({ href = "#contact" }) {
 
   const handleSubmit = async () => {
     if (!email || !name) return;
-    
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    try {
-      // EmailJS configuration - uses your existing environment variables
-      const serviceId = import.meta.env.VITE_SERVICE_ID;
-      const templateId = import.meta.env.VITE_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+    const { error } = await supabase
+      .from('subscribers')
+      .insert({
+        email: email.trim().toLowerCase(),
+        name: name.trim(),
+        source: 'popup',
+      });
 
-      // Create form data for EmailJS submission
-      const formData = new FormData();
-      formData.append('user_name', name);
-      formData.append('user_email', email);
-      formData.append('message', 'Bloodborne Bulletin subscription request');
+    // Postgres unique_violation -> already subscribed. Treat as success.
+    const alreadySubscribed = error?.code === '23505';
 
-      // For production, uncomment the following line and import emailjs:
-      // await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey });
-      
-      // Simulate API call for demonstration
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+    if (!error || alreadySubscribed) {
       setSubmitStatus('success');
       localStorage.setItem("newsletterSubscribed", "true");
-
-
-    } catch (error) {
+    } else {
       console.error('Newsletter signup failed:', error);
       setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
     }
+
+    setIsSubmitting(false);
   };
 
   const resetForm = () => {
@@ -83,10 +73,10 @@ export default function NewsletterModal({ href = "#contact" }) {
   };
 
   const handleClose = () => {
-  localStorage.setItem("newsletterDismissed", Date.now());
-  setVisible(false);
-  resetForm();
-};
+    localStorage.setItem("newsletterDismissed", Date.now());
+    setVisible(false);
+    resetForm();
+  };
 
   return (
     <>
@@ -102,140 +92,132 @@ export default function NewsletterModal({ href = "#contact" }) {
             aria-modal="true"
             aria-label="Newsletter sign-up"
           >
-          <div className="newsletter-content">
-            {!isExpanded ? (
-              // Initial popup content
-              <>
-                <p>📜 Join the Bloodborne Bulletin</p>
-                <button 
-                  onClick={handleSignupClick}
-                  className="newsletter-button"
-                >
-                  Count me in
-                </button>
-                <button
-                  onClick={handleClose}
-                  aria-label="Dismiss newsletter prompt"
-                  className="newsletter-close"
-                >
-                  ×
-                </button>
-              </>
-            ) : (
-              // Expanded form content
-              <div className="newsletter-form-container">
-  {submitStatus === 'success' ? (
-    <div className="newsletter-success">
-      <div className="success-icon">✓</div>
-      <h3>Subscription Confirmed</h3>
-      <p>You’ve successfully joined the newsletter. Thank you!</p>
-    </div>
-  ) : submitStatus === 'error' ? (
-    <div className="newsletter-error">
-      <div className="error-icon">⚠</div>
-      <h3>Submission Failed</h3>
-      <p>There was an error processing your request. Please try again.</p>
-      <button 
-        onClick={() => setSubmitStatus(null)}
-        className="newsletter-retry-button"
-      >
-        Try Again
-      </button>
-    </div>
-  ) : (
-    <div className="newsletter-form" ref={formRef}>
-      <h3>Subscribe to Our Newsletter</h3>
-      <p className="form-description">Get updates, news, and exclusive content delivered to your inbox.</p>
-      
-      <div className="form-field">
-        <label htmlFor="subscriber-name">Name</label>
-        <input
-          type="text"
-          id="subscriber-name"
-          name="user_name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your full name"
-          className="newsletter-input"
-          required
-        />
-      </div>
+            <div className="newsletter-content">
+              {!isExpanded ? (
+                <>
+                  <p>📜 Join the Bloodborne Bulletin</p>
+                  <button
+                    onClick={handleSignupClick}
+                    className="newsletter-button"
+                  >
+                    Count me in
+                  </button>
+                  <button
+                    onClick={handleClose}
+                    aria-label="Dismiss newsletter prompt"
+                    className="newsletter-close"
+                  >
+                    ×
+                  </button>
+                </>
+              ) : (
+                <div className="newsletter-form-container">
+                  {submitStatus === 'success' ? (
+                    <div className="newsletter-success">
+                      <div className="success-icon">✓</div>
+                      <h3>Subscription Confirmed</h3>
+                      <p>You've successfully joined the newsletter. Thank you!</p>
+                    </div>
+                  ) : submitStatus === 'error' ? (
+                    <div className="newsletter-error">
+                      <div className="error-icon">⚠</div>
+                      <h3>Submission Failed</h3>
+                      <p>There was an error processing your request. Please try again.</p>
+                      <button
+                        onClick={() => setSubmitStatus(null)}
+                        className="newsletter-retry-button"
+                      >
+                        Try Again
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="newsletter-form" ref={formRef}>
+                      <h3>Subscribe to Our Newsletter</h3>
+                      <p className="form-description">Get updates, news, and exclusive content delivered to your inbox.</p>
 
-      <div className="form-field">
-        <label htmlFor="subscriber-email">Email Address</label>
-        <input
-          type="email"
-          id="subscriber-email"
-          name="user_email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-          className="newsletter-input"
-          required
-        />
-      </div>
+                      <div className="form-field">
+                        <label htmlFor="subscriber-name">Name</label>
+                        <input
+                          type="text"
+                          id="subscriber-name"
+                          name="user_name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Your full name"
+                          className="newsletter-input"
+                          required
+                        />
+                      </div>
 
-      <div className="form-actions">
-        <button
-          onClick={() => setIsExpanded(false)}
-          className="newsletter-back-button"
-          disabled={isSubmitting}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={isSubmitting || !email || !name}
-          className="newsletter-submit-button"
-        >
-          {isSubmitting ? 'Submitting...' : 'Subscribe'}
-        </button>
-      </div>
-    </div>
-  )}
+                      <div className="form-field">
+                        <label htmlFor="subscriber-email">Email Address</label>
+                        <input
+                          type="email"
+                          id="subscriber-email"
+                          name="user_email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="you@example.com"
+                          className="newsletter-input"
+                          required
+                        />
+                      </div>
 
-  <button
-    onClick={handleClose}
-    aria-label="Close newsletter form"
-    className="newsletter-close"
-  >
-    ×
-  </button>
-</div>
+                      <div className="form-actions">
+                        <button
+                          onClick={() => setIsExpanded(false)}
+                          className="newsletter-back-button"
+                          disabled={isSubmitting}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={handleSubmit}
+                          disabled={isSubmitting || !email || !name}
+                          className="newsletter-submit-button"
+                        >
+                          {isSubmitting ? 'Submitting...' : 'Subscribe'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
-            )}
-          </div>
-        </motion.div>
+                  <button
+                    onClick={handleClose}
+                    aria-label="Close newsletter form"
+                    className="newsletter-close"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {import.meta.env.DEV && (
+        <div style={{ position: 'fixed', bottom: '10px', left: '10px', zIndex: 9999 }}>
+          <button
+            onClick={() => {
+              localStorage.removeItem("newsletterDismissed");
+              localStorage.removeItem("newsletterSubscribed");
+              alert("Newsletter state reset. Scroll again to trigger popup.");
+            }}
+            style={{
+              background: "#1B0C00",
+              color: "#CDB48B",
+              border: "1px solid #8C5431",
+              borderRadius: "4px",
+              padding: "6px 12px",
+              fontSize: "12px",
+              cursor: "pointer",
+              opacity: 0.6
+            }}
+          >
+            🧪 Reset Newsletter State
+          </button>
+        </div>
       )}
-    </AnimatePresence>
-    {import.meta.env.DEV && (
-      <div style={{ position: 'fixed', bottom: '10px', left: '10px', zIndex: 9999 }}>
-        <button
-          onClick={() => {
-            localStorage.removeItem("newsletterDismissed");
-            localStorage.removeItem("newsletterSubscribed");
-            alert("Newsletter state reset. Scroll again to trigger popup.");
-          }}
-          style={{
-            background: "#1B0C00",
-            color: "#CDB48B",
-            border: "1px solid #8C5431",
-            borderRadius: "4px",
-            padding: "6px 12px",
-            fontSize: "12px",
-            cursor: "pointer",
-            opacity: 0.6
-          }}
-        >
-          🧪 Reset Newsletter State
-        </button>
-      </div>
-    )}
     </>
-
-
-  
-
-    
   );
 }
