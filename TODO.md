@@ -1,33 +1,39 @@
 # TODO List
 
-## Blog System
-- [ ] Create `/blog` route component and basic layout
-- [ ] Add blog index page with placeholder post previews
-- [ ] Implement routing logic for individual blog post views
-- [ ] Consider using MDX or CMS (optional)
+## Newsletter / Subscribers (Supabase)
+- [x] Wire NewsletterModal to a real backend (Supabase `subscribers` table)
+- [x] Only mark subscribed in localStorage on success
+- [ ] Build double opt-in: send confirmation email via Resend / Supabase Edge Function; flip `confirmed=true` when the user clicks the link
+- [ ] Build unsubscribe page that flips `unsubscribed_at` using the `unsubscribe_token`
+- [ ] Decide on a sender (Resend, Postmark, AWS SES) and create a Supabase Edge Function for broadcasts
+- [ ] Replace the bottom EmailJS "contact" form with either a real contact form or a second signup surface (currently this is a generic message-to-mom form — fine but should be relabeled)
 
-## Newsletter Integration
-- [ ] Choose newsletter platform (Mailchimp, ConvertKit, etc.)
-- [ ] Create mailing list and get embedded form or signup URL
-- [ ] Update `NewsletterModal.jsx` to point to live signup endpoint
-- [ ] (Optional) Add session storage to prevent re-showing modal
+## Blog (Supabase)
+- [x] Move posts from hardcoded `src/data/posts.js` into Supabase `posts` table
+- [x] Remove the misleading localStorage "Write a post" form
+- [x] Fetch posts (list + single) from Supabase
+- [x] Delete dead `/post/:id` route + `src/pages/Post.jsx`
+- [ ] Build an admin UI for writing/editing posts (or document the Supabase Studio flow well enough that mom can use it)
+- [ ] Add tag filtering on `/blog`
+- [ ] Add featured-post / pinned-post support
 
 ## Contact Section
-- [ ] Build `<section id="contact">` at bottom of page
-- [ ] Add a contact form or basic call-to-action block
-- [ ] Wire up form submission if using backend or 3rd-party service
+- [ ] Audit the bottom "Newsletter" component — it's actually a contact form, rename + adjust copy
 
 ## Social Media Integration
-- [ ] Replace placeholder social media links with real URLs
-- [ ] Add `aria-label`s and `rel="noopener noreferrer"` to links
-- [ ] Ensure hover/focus styles match theme
+- [ ] Replace placeholder URLs in `Footer.jsx` (currently point to twitter.com, instagram.com, etc.) with mom's real handles
+- [ ] Verify all social icons match theme on hover/focus
+
+## Performance
+- [ ] `public/Raven.gif` is 16 MB — convert to MP4/WebM
+- [ ] `public/Hero_bg.png` is 1.8 MB — convert to compressed JPG or WebP
+- [ ] Audit `.glb` model sizes (5 MB+ each)
 
 ## Design Enhancements
-- [ ] Add smooth fade-in transition on page load for hero
-- [ ] Improve mobile responsiveness of hero text and modal
-- [ ] Design and implement 404 fallback route
-- [ ] Optionally add ambient scroll effects or lighting to `Canvas`
+- [ ] Smooth fade-in on hero
+- [ ] Mobile responsiveness pass on hero + modal
+- [ ] 404 fallback route
 
 ## Cleanup
-- [ ] Remove unused placeholder files (e.g. `Shop.jsx`, `Blog.jsx` if not reused)
-- [ ] Audit `hero.css` for unused selectors after final layout pass
+- [ ] Remove `gray-matter` and `buffer` from package.json (no longer used after Post.jsx deletion)
+- [ ] Audit `hero.css` for unused selectors
