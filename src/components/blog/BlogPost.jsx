@@ -37,9 +37,9 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
 
   if (!post || !post.title) {
     return (
-      <article className="prose mx-auto p-4 text-center text-red-600" role="alert">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <p className="text-red-800 font-medium">Error: Invalid or missing post data.</p>
+      <article className="mx-auto p-4 text-center" role="alert">
+        <div className="blog-panel p-6">
+          <p className="text-red-500">Error: Invalid or missing post data.</p>
         </div>
       </article>
     );
@@ -98,15 +98,19 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
   return (
     <>
       {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
+      <div className="fixed top-0 left-0 w-full h-1 bg-black/60 z-50">
+        <div
+          className="h-full transition-all duration-300"
+          style={{
+            width: `${scrollProgress}%`,
+            background: 'linear-gradient(90deg, var(--color-accent), #6e0f0c)',
+            boxShadow: '0 0 10px var(--color-glow)',
+          }}
         />
       </div>
 
       <article
-        className="max-w-4xl mx-auto bg-white dark:bg-gray-900 shadow-xl rounded-2xl overflow-hidden"
+        className="blog-panel max-w-4xl mx-auto overflow-hidden"
         aria-labelledby="post-title"
       >
         {/* Hero Section */}
@@ -124,7 +128,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
         <div className="p-6 md:p-8">
           {/* Header */}
           <header className="mb-8">
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <div className="blog-meta flex flex-wrap items-center gap-4 mb-4">
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
                 <span>{readingTime} min read</span>
@@ -135,25 +139,26 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
               </div>
             </div>
 
-            <h1 
-              id="post-title" 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-4"
+            <h1
+              id="post-title"
+              className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-3"
             >
               {post.title}
             </h1>
+            <hr className="blog-rule mb-4" aria-hidden="true" />
 
             {post.excerpt && (
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg opacity-80 leading-relaxed italic">
                 {post.excerpt}
               </p>
             )}
           </header>
 
           {/* Author Bio */}
-          <AuthorBio className="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl" />
+          <AuthorBio />
 
           {/* Main Content */}
-          <section className="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+          <section className="prose prose-lg max-w-none">
             {post.body ? (
               <ReactMarkdown
                 components={{
@@ -189,16 +194,16 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
 
           {/* Tags */}
           {post.tags?.length > 0 && (
-            <section className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-2 mb-3">
-                <Tag className="w-4 h-4 text-gray-500" />
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Tags</span>
+            <section className="mt-8 pt-6 border-t border-[rgba(205,180,139,0.16)]">
+              <div className="blog-meta flex items-center gap-2 mb-3">
+                <Tag className="w-4 h-4" />
+                <span>Tags</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors cursor-pointer"
+                    className="blog-chip px-3 py-1 rounded-full text-sm"
                   >
                     #{tag}
                   </span>
@@ -208,15 +213,11 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
           )}
 
           {/* Action Bar */}
-          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
+          <div className="mt-8 pt-6 border-t border-[rgba(205,180,139,0.16)] flex items-center justify-between">
             {/* Like Button */}
             <button
               onClick={handleLike}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                liked 
-                  ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-              }`}
+              className={`blog-btn flex items-center gap-2 px-4 py-2 rounded-lg ${liked ? 'blog-btn--active' : ''}`}
               aria-label={liked ? 'Unlike post' : 'Like post'}
             >
               <Heart 
@@ -229,7 +230,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
             <div className="relative">
               <button
                 onClick={() => setShareMenuOpen(!shareMenuOpen)}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg transition-colors"
+                className="blog-btn flex items-center gap-2 px-4 py-2 rounded-lg"
                 aria-label="Share post"
               >
                 <Share2 className="w-5 h-5" />
@@ -237,7 +238,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
               </button>
 
               {shareMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-10">
+                <div className="blog-panel absolute right-0 mt-2 w-48 shadow-lg z-10">
                   <div className="p-2">
                     {shareLinks.map((link) => (
                       <a
@@ -245,7 +246,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${link.color} hover:bg-gray-50 dark:hover:bg-gray-700`}
+                        className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-white/5"
                         onClick={() => setShareMenuOpen(false)}
                       >
                         <link.icon className="w-4 h-4" />
@@ -257,7 +258,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
                         copyToClipboard();
                         setShareMenuOpen(false);
                       }}
-                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:text-green-600 hover:bg-gray-50 dark:hover:bg-gray-700 w-full text-left"
+                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-white/5 w-full text-left"
                     >
                       {copySuccess ? (
                         <Check className="w-4 h-4 text-green-600" />

@@ -2,7 +2,6 @@ import React, { useState, useMemo, useEffect } from 'react';
 import PostPreview from './PostPreview';
 import SearchBar from '../utility/SearchBar';
 import Pagination from '../utility/Pagination';
-import shortStories from "../../data/shortStories.js";
 import { supabase, mapPost } from '../../lib/supabase';
 import { debounce } from 'lodash';
 
@@ -75,45 +74,34 @@ export default function AuthorBlogPage() {
 
   return (
     <section className="max-w-5xl mx-auto px-4 py-10" aria-labelledby="blog-title">
-      <h1 id="blog-title" className="text-4xl font-bold mb-6 text-gray-900">
-        Author's Blog
-      </h1>
+      <header className="mb-10">
+        <p className="blog-meta mb-2">From the desk of Melissa Michaels</p>
+        <h1 id="blog-title" className="text-4xl mb-1">
+          The Bloodborne Dispatch
+        </h1>
+        <hr className="blog-rule" aria-hidden="true" />
+        <p className="mt-4 opacity-80 max-w-2xl">
+          Field notes on writing, the Bloodborne Chronicles, and the shadows in
+          between — collected from a decade at the keyboard.
+        </p>
+      </header>
 
-      <div className="mb-10">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Short Stories</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {shortStories.map((story) => (
-            <a
-              key={story.title}
-              href={story.url}
-              className="group block rounded-2xl border border-gray-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <p className="text-sm text-gray-500">{story.type}</p>
-              <p className="text-lg font-semibold text-gray-900 group-hover:text-red-700">{story.title}</p>
-              <p className="text-sm text-gray-600 mt-2">{story.description}</p>
-            </a>
-          ))}
-        </div>
+      <div className="mb-8">
+        <SearchBar
+          onChange={(value) => debouncedSetSearch(value)}
+          aria-label="Search blog posts"
+          placeholder="Search posts by title, summary, or tags..."
+        />
       </div>
 
-      <SearchBar
-        value={search}
-        onChange={(e) => debouncedSetSearch(e.target.value)}
-        aria-label="Search blog posts"
-        placeholder="Search posts by title, summary, or tags..."
-        className="mb-8"
-      />
-
       {error && (
-        <p className="text-red-600 text-center mb-6" role="alert">
+        <p className="text-red-500 text-center mb-6" role="alert">
           {error}
         </p>
       )}
 
       {isLoading ? (
-        <p className="text-center text-gray-500" aria-live="polite">
+        <p className="text-center opacity-70" aria-live="polite">
           Loading posts...
         </p>
       ) : (
@@ -126,7 +114,7 @@ export default function AuthorBlogPage() {
             />
           ))}
           {paginated.length === 0 && (
-            <p className="text-center text-gray-500 col-span-full mt-12" aria-live="polite">
+            <p className="text-center opacity-70 col-span-full mt-12" aria-live="polite">
               No posts found.
             </p>
           )}
@@ -135,11 +123,9 @@ export default function AuthorBlogPage() {
 
       {totalPages > 1 && (
         <Pagination
-          currentPage={page}
+          page={page}
           totalPages={totalPages}
           onPageChange={(newPage) => setPage(newPage)}
-          className="mt-10"
-          aria-label="Blog pagination"
         />
       )}
     </section>

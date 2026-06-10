@@ -143,7 +143,6 @@ export default function Nav() {
 
   // Check if we're on blog pages
   const isBlogActive = location.pathname.startsWith("/blog");
-  const isExperienceActive = location.pathname === "/experience";
 
   return (
     <nav 
@@ -201,25 +200,6 @@ export default function Nav() {
           Blog
         </li>
 
-        <li
-          onClick={() => {
-            navigate("/experience");
-            closeMenu();
-          }}
-          role="menuitem"
-          tabIndex={open ? 0 : -1}
-          onKeyDown={(e) =>
-            handleKeyDown(e, () => {
-              navigate("/experience");
-              closeMenu();
-            })
-          }
-          aria-label="Navigate to Experience page"
-          className={isExperienceActive ? "nav__link--active" : ""}
-          aria-current={isExperienceActive ? "page" : undefined}
-        >
-          Experience
-        </li>
       </ul>
 
       {open && (

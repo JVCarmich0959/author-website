@@ -1,6 +1,6 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import {BrowserRouter, Routes, Route } from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './styles/tailwind.css'
 import './index.css'
 
@@ -10,7 +10,6 @@ import Layout from './components/Layout.jsx'
 // Lazy load your components
 const BlogPage = lazy(() => import ('./components/blog/BlogPage'))
 const BlogPostWrapper = lazy(() => import('./components/blog/BlogPostWrapper'))
-const ExperiencePage = lazy(() => import('./experience/ExperiencePage.jsx'))
 
 createRoot(document.getElementById('root')).render(
 <StrictMode>
@@ -27,7 +26,7 @@ createRoot(document.getElementById('root')).render(
             <Route index element={<App />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPostWrapper />} />
-          <Route path="experience" element={<ExperiencePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </Suspense>

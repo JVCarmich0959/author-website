@@ -93,9 +93,94 @@ p, li {
   line-height: 1.7;
 }
 
-/* blog post bodies sit on a white card — let them use the card's color */
-.prose p, .prose li {
-  color: inherit;
+/* ---- Blog: gothic skin ---------------------------------------------- */
+
+/* dark parchment panel; .blog-card adds the hover lift for preview grids */
+.blog-panel {
+  background: linear-gradient(165deg, var(--color-base-900), var(--color-base-950));
+  border: 1px solid rgba(205, 180, 139, 0.16);
+  border-radius: 1rem;
+}
+.blog-card {
+  background: linear-gradient(165deg, var(--color-base-900), var(--color-base-950));
+  border: 1px solid rgba(205, 180, 139, 0.16);
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.blog-card:hover,
+.blog-card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(185, 33, 29, 0.55);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 28px var(--color-accent-soft);
+}
+
+/* small-caps metadata: dates, read time, breadcrumbs */
+.blog-meta {
+  color: rgba(205, 180, 139, 0.8);
+  font-size: var(--type-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.blog-chip {
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(185, 33, 29, 0.4);
+  color: var(--color-antique-gold);
+}
+
+.blog-input {
+  background: rgba(5, 6, 7, 0.7);
+  border: 1px solid rgba(205, 180, 139, 0.25);
+  color: var(--color-base-100);
+}
+.blog-input::placeholder {
+  color: rgba(205, 180, 139, 0.5);
+}
+.blog-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 18px var(--color-accent-soft);
+}
+
+.blog-btn {
+  background: rgba(205, 180, 139, 0.08);
+  border: 1px solid rgba(205, 180, 139, 0.22);
+  color: var(--color-antique-gold);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+.blog-btn:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 14px var(--color-accent-soft);
+}
+.blog-btn--active {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-base-100);
+}
+
+/* decorative rule under blog headings */
+.blog-rule {
+  width: 72px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  border: none;
+  margin: var(--space-2) 0 0;
+}
+
+/* post body niceties */
+.prose img {
+  display: block;
+  margin: var(--space-4) auto;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(205, 180, 139, 0.22);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose em {
+  color: var(--color-antique-gold);
 }
 
 /* responsive container widths */

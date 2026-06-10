@@ -26,3 +26,6 @@ dist-ssr
 *.sw?
 public/css/tailwind.css
 .venv
+
+# Local Netlify folder
+.netlify

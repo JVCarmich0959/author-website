@@ -44,8 +44,11 @@ export default function BlogPostWrapper() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">Loading post...</p>
+          <div
+            className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4"
+            style={{ borderColor: 'var(--color-accent)' }}
+          ></div>
+          <p className="text-lg opacity-80">Loading post...</p>
         </div>
       </div>
     );
@@ -54,25 +57,17 @@ export default function BlogPostWrapper() {
   if (error || !post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
-          <h1 className="text-6xl font-bold text-gray-300 mb-4">404</h1>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Blog Post Not Found
-          </h2>
-          <p className="text-gray-600 mb-8">
-            The blog post you're looking for doesn't exist or may have been moved.
+        <div className="blog-panel text-center max-w-md mx-auto px-8 py-10">
+          <h1 className="text-6xl mb-4">404</h1>
+          <h2 className="text-2xl mb-4">Blog Post Not Found</h2>
+          <p className="opacity-80 mb-8">
+            The dispatch you're looking for doesn't exist or may have been moved.
           </p>
           <div className="space-x-4">
-            <Link
-              to="/blog"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-            >
+            <Link to="/blog" className="blog-btn inline-block px-6 py-3 rounded-lg">
               Back to Blog
             </Link>
-            <Link
-              to="/"
-              className="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
-            >
+            <Link to="/" className="blog-btn inline-block px-6 py-3 rounded-lg">
               Home
             </Link>
           </div>
@@ -89,24 +84,21 @@ export default function BlogPostWrapper() {
       />
 
       <nav className="container mx-auto px-4 py-6">
-        <div className="flex items-center space-x-2 text-sm text-gray-600">
-          <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
-          <span>/</span>
-          <Link to="/blog" className="hover:text-blue-600 transition-colors">Blog</Link>
-          <span>/</span>
-          <span className="text-gray-800">{post.title}</span>
+        <div className="blog-meta flex items-center space-x-2">
+          <Link to="/">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link to="/blog">Blog</Link>
+          <span aria-hidden="true">/</span>
+          <span className="opacity-70 truncate max-w-[50vw]">{post.title}</span>
         </div>
       </nav>
 
       <BlogPost post={post} />
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center border-t pt-8">
-          <Link
-            to="/blog"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            ← Back to all posts
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <div className="flex justify-between items-center border-t border-[rgba(205,180,139,0.16)] pt-8">
+          <Link to="/blog" className="inline-flex items-center">
+            ← Back to all dispatches
           </Link>
         </div>
       </div>
