@@ -54,6 +54,11 @@ html {
   font-family: var(--font-body);
 }
 
+/* keep anchored sections clear of the fixed header when scrolled to */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   background: radial-gradient(circle at top, rgba(12, 14, 20, 0.9), var(--color-base-950));
   min-height: 100vh;

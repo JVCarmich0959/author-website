@@ -18,18 +18,25 @@ export default function Nav() {
   const navRef = useRef(null);
   const closeTimeoutRef = useRef(null);
 
-  const scrollTo = useCallback((id) => {
+  const scrollTo = useCallback((id, attempt = 0) => {
     const el = document.getElementById(id);
-    if (el) {
-      const headerOffset = 80;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+    if (!el) {
+      // home sections are lazy-loaded; when arriving from another page the
+      // target may not be mounted yet, so retry briefly
+      if (attempt < 20) {
+        setTimeout(() => scrollTo(id, attempt + 1), 150);
+      }
+      return;
     }
+    // the open menu locks body scroll (overflow: hidden); release it before
+    // scrolling or mobile browsers cancel the smooth scroll
+    document.body.style.overflow = "unset";
+    // setTimeout instead of requestAnimationFrame: rAF is throttled in
+    // background/low-power states on mobile. scroll-margin-top in index.css
+    // keeps the section clear of the fixed header.
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 0);
   }, []);
 
   const closeMenu = useCallback(() => {
@@ -38,12 +45,12 @@ export default function Nav() {
 
   const goTo = useCallback(
     (id) => {
+      closeMenu();
       if (location.pathname !== "/") {
         navigate(`/#${id}`);
       } else {
         scrollTo(id);
       }
-      closeMenu();
     },
     [location.pathname, navigate, scrollTo, closeMenu]
   );
