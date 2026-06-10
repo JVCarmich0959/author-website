@@ -4,8 +4,9 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
 export default defineConfig({
-  // GitHub Pages serves this project at /author-website/, not the domain root
-  base: '/author-website/',
+  // GitHub Pages serves this project at /author-website/; Netlify and local
+  // dev serve from the root. npm run deploy sets GHPAGES=1.
+  base: process.env.GHPAGES ? '/author-website/' : '/',
   plugins: [
     // use default settings so React plugin handles JSX in .jsx and .js
     react(),
