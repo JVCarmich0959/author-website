@@ -5,12 +5,12 @@ import { useGLTF, OrbitControls } from "@react-three/drei";
 
 // 1) Named export of your loaded scene
 export function BookModel(props) {
-  const { scene } = useGLTF("/MelissaBook.glb");
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}MelissaBook.glb`);
   return <primitive object={scene} {...props} />;
 }
 
 // 2) Preload for better performance
-useGLTF.preload("/MelissaBook.glb");
+useGLTF.preload(`${import.meta.env.BASE_URL}MelissaBook.glb`);
 
 // 3) Default export: a small Canvas component you can drop in anywhere
 export default function BookModelCanvas({ width = 300, height = 300 }) {

@@ -10,7 +10,14 @@ if (!url || !key) {
   );
 }
 
-export const supabase = createClient(url ?? '', key ?? '');
+// createClient throws on an empty URL, which would crash the whole app at
+// import time. Fall back to a placeholder client so the site still renders;
+// its requests fail at the network layer and surface through the existing
+// { data, error } handling in components.
+export const supabase = createClient(
+  url || 'https://placeholder.supabase.co',
+  key || 'placeholder-key'
+);
 
 // Convert a posts row from DB shape to the shape the existing
 // PostPreview / BlogPost components expect.

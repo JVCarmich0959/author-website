@@ -148,7 +148,7 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
 
           <div className="hImg">
             <img
-              src="/Hero_bg.png"
+              src={`${import.meta.env.BASE_URL}Hero_bg.png`}
               alt="Urban fantasy themed hero background featuring mystical elements"
               loading="eager"
               fetchPriority="high"

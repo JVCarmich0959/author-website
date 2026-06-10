@@ -87,7 +87,7 @@ const App = () => {
             <About
               as="div"
               id={null}
-              headshot="/aboutme.jpg"
+              headshot={`${import.meta.env.BASE_URL}aboutme.jpg`}
               bio={[
                 `Some stories find you in the static between frequencies, in the three frames of thermal 
             where something moves too fast to be human. Melissa Michaels writes at the intersection 

@@ -4,7 +4,7 @@ export default function AuthorBio({ compact = false }) {
   return (
     <div className="flex items-center gap-4 my-4">
       <img
-        src="/p1.png"
+        src={`${import.meta.env.BASE_URL}p1.jpg`}
         alt="Melissa Michaels"
         className={compact ? 'w-12 h-12 rounded-full' : 'w-20 h-20 rounded-full'}
       />
