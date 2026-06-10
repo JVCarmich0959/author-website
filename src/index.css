@@ -1,7 +1,5 @@
 /* index.css — Global Gothic Theme */
 
-@import "./styles/scrollytelling.css";
-
 :root {
   /* Design tokens */
   --color-base-950: #050607;

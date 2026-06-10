@@ -20,7 +20,8 @@
 /* Base Styles */
 .hero {
   position: relative;
-  height: 100%;
+  /* fill the viewport below the fixed nav (Layout pads 4rem on top) */
+  min-height: calc(100svh - 4rem);
   overflow: hidden;
   display: flex;
   flex-direction: column;
