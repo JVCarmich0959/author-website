@@ -95,7 +95,7 @@ export default function NewsletterModal({ href = "#contact" }) {
             <div className="newsletter-content">
               {!isExpanded ? (
                 <>
-                  <p>📜 Join the Bloodborne Bulletin</p>
+                  <p>📜 Subscribe to The Bloodborne Chronicles — dispatches from editor E. Nocturne, with story clues, release news, and giveaways</p>
                   <button
                     onClick={handleSignupClick}
                     className="newsletter-button"

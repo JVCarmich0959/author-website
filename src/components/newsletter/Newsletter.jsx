@@ -1,7 +1,7 @@
 import "./newsletter.css";
-import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { supabase } from "../../lib/supabase";
 
 const listVariant = {
   initial: {
@@ -25,29 +25,33 @@ const Contact = () => {
   const ref = useRef();
   const form = useRef();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        form.current,
-        {
-          publicKey: import.meta.env.VITE_PUBLIC_KEY,
-        }
-      )
-      .then(
-        () => {
-          setSuccess(true);
-          setError(false);
-        },
-        (error) => {
-          console.log(error);
-          setError(true);
-          setSuccess(false);
-        }
-      );
+    const data = new FormData(form.current);
+    const email = String(data.get("user_email") || "").trim().toLowerCase();
+    const message = String(data.get("user_message") || "").trim();
+    const name = String(data.get("user_username") || "").trim();
+
+    if (!email || !message) {
+      setError(true);
+      setSuccess(false);
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from("contact_messages")
+      .insert({ name: name || null, email, message });
+
+    if (insertError) {
+      console.error("Contact message failed:", insertError);
+      setError(true);
+      setSuccess(false);
+    } else {
+      setSuccess(true);
+      setError(false);
+      form.current.reset();
+    }
   };
 
   const isInView = useInView(ref, { margin: "-200px" });
@@ -74,6 +78,7 @@ const Contact = () => {
               type="email"
               name="user_email"
               placeholder="john@gmail.com"
+              required
             />
           </motion.div>
           <motion.div variants={listVariant} className="formItem">
@@ -82,6 +87,7 @@ const Contact = () => {
               rows={10}
               name="user_message"
               placeholder="Write your message..."
+              required
             ></textarea>
           </motion.div>
           <motion.button variants={listVariant} className="formButton">

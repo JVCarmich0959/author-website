@@ -93,6 +93,11 @@ p, li {
   line-height: 1.7;
 }
 
+/* blog post bodies sit on a white card — let them use the card's color */
+.prose p, .prose li {
+  color: inherit;
+}
+
 /* responsive container widths */
 @media (min-width: 640px) {
   .container { max-width: 640px; }

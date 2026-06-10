@@ -153,7 +153,7 @@ export default function BlogPost({ post, onLike, likeCount = 0, isLiked = false 
           <AuthorBio className="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl" />
 
           {/* Main Content */}
-          <section className="prose prose-lg dark:prose-invert max-w-none">
+          <section className="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
             {post.body ? (
               <ReactMarkdown
                 components={{

@@ -9,7 +9,7 @@ export default function AuthorBio({ compact = false }) {
         className={compact ? 'w-12 h-12 rounded-full' : 'w-20 h-20 rounded-full'}
       />
       {!compact && (
-        <p className="text-sm max-w-prose">
+        <p className="text-sm max-w-prose text-gray-700 dark:text-gray-300">
           Melissa Michaels writes the Bloodborne Chronicles and loves sharing
           behind-the-scenes looks at her urban fantasy world.
         </p>

@@ -17,7 +17,7 @@ export default function NewsletterCta({ href = "#contact" }) {
       initial="initial"
       animate="animate"
       className="contactLink"
-      aria-label="Join the Bloodborne Bulletin" // [COMMENT] Improves accessibility by describing the purpose
+      aria-label="Join The Bloodborne Chronicles" // [COMMENT] Improves accessibility by describing the purpose
     >
       <motion.div
         className="contactButton"
@@ -40,7 +40,7 @@ export default function NewsletterCta({ href = "#contact" }) {
           role="img"
           aria-labelledby="newsletter-title"
         >
-          <title id="newsletter-title">Join the Bloodborne Bulletin</title>
+          <title id="newsletter-title">Join The Bloodborne Chronicles</title>
           {/* [COMMENT] Red circular background */}
           <circle cx="100" cy="100" r="90" fill="var(--blood-red)" />
 
