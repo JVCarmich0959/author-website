@@ -1,4 +1,4 @@
-import{r as Ye,g as fx,j as Dn}from"./index-Br-YBQFt.js";/**
+import{r as Ye,g as fx,j as Dn}from"./index-CWUYP2MY.js";/**
  * @license
  * Copyright 2010-2024 Three.js Authors
  * SPDX-License-Identifier: MIT
