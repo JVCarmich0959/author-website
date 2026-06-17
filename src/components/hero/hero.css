@@ -315,6 +315,35 @@
   cursor: pointer;
 }
 
+/* "blood" gets an occasional red neon flicker (callback to the old hero) */
+.flicker-blood {
+  color: var(--blood-red);
+  text-shadow: 0 0 6px rgba(185, 33, 29, 0.7), 0 0 12px rgba(185, 33, 29, 0.4);
+  animation: bloodFlicker 5s linear infinite;
+}
+
+@keyframes bloodFlicker {
+  0%, 18%, 22%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 6px rgba(185, 33, 29, 0.7), 0 0 12px rgba(185, 33, 29, 0.4);
+  }
+  20% {
+    opacity: 0.35;
+    text-shadow: none;
+  }
+  55% {
+    opacity: 0.6;
+    text-shadow: 0 0 4px rgba(185, 33, 29, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flicker-blood {
+    animation: none;
+    text-shadow: 0 0 6px rgba(185, 33, 29, 0.5);
+  }
+}
+
 .nav__links {
   list-style: none;
   display: flex;

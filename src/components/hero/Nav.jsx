@@ -166,7 +166,7 @@ export default function Nav() {
         onKeyDown={(e) => handleKeyDown(e, () => goTo("home"))}
         aria-label="Navigate to Home section"
       >
-        It's in the blood
+        It's in the <span className="flicker-blood">blood</span>
       </div>
 
       <button {...menuButtonProps}>
