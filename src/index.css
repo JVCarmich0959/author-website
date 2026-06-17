@@ -172,6 +172,78 @@ p, li {
   margin: var(--space-2) 0 0;
 }
 
+/* ---- Blog comments -------------------------------------------------- */
+.comments {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(205, 180, 139, 0.16);
+}
+.comments-title {
+  font-size: var(--type-xl);
+}
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.comment {
+  padding: var(--space-3) var(--space-4);
+}
+.comment-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+.comment-author {
+  font-family: var(--font-display);
+  color: var(--color-antique-gold);
+}
+.comment-body {
+  color: var(--color-base-100);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.comment-form {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.comment-form-title {
+  font-size: var(--type-lg);
+}
+.comment-form textarea.blog-input {
+  resize: vertical;
+}
+.comment-form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.comment-form .blog-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.5rem;
+}
+.comment-error {
+  color: #f08a86;
+  font-size: var(--type-sm);
+}
+/* honeypot — kept out of the visual + a11y tree, present for bots */
+.comment-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 /* post body niceties */
 .prose img {
   display: block;

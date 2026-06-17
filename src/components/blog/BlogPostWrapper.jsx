@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase, mapPost } from '../../lib/supabase';
 import BlogPost from './BlogPost';
+import Comments from './Comments';
 import SEO from '../utility/SEO';
 
 export default function BlogPostWrapper() {
@@ -94,6 +95,10 @@ export default function BlogPostWrapper() {
       </nav>
 
       <BlogPost post={post} />
+
+      <div className="max-w-4xl mx-auto px-4">
+        <Comments slug={post.slug} />
+      </div>
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="flex justify-between items-center border-t border-[rgba(205,180,139,0.16)] pt-8">
