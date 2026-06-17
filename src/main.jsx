@@ -10,6 +10,7 @@ import Layout from './components/Layout.jsx'
 // Lazy load your components
 const BlogPage = lazy(() => import ('./components/blog/BlogPage'))
 const BlogPostWrapper = lazy(() => import('./components/blog/BlogPostWrapper'))
+const ConfirmSubscription = lazy(() => import('./components/newsletter/ConfirmSubscription'))
 
 createRoot(document.getElementById('root')).render(
 <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
             <Route index element={<App />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPostWrapper />} />
+          <Route path="confirm" element={<ConfirmSubscription />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

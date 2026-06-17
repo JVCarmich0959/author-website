@@ -17,6 +17,8 @@ function NewsletterSignup() {
   const [status, setStatus] = useState(null); // null | 'success' | 'error'
   const [submitting, setSubmitting] = useState(false);
 
+  const [already, setAlready] = useState(false);
+
   const subscribe = async (e) => {
     e.preventDefault();
     const value = email.trim().toLowerCase();
@@ -25,15 +27,16 @@ function NewsletterSignup() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase
-      .from("subscribers")
-      .insert({ email: value, source: "contact-section" });
+    // edge function saves the subscriber AND sends the confirmation email
+    const { data, error } = await supabase.functions.invoke("subscribe", {
+      body: { email: value, source: "contact-section" },
+    });
     setSubmitting(false);
-    if (error && error.code !== "23505") {
-      // 23505 = unique violation → already subscribed, treat as success
-      console.error("Subscribe failed:", error);
+    if (error || data?.error) {
+      console.error("Subscribe failed:", error || data?.error);
       setStatus("error");
     } else {
+      setAlready(data?.status === "already_confirmed");
       setStatus("success");
       setEmail("");
     }
@@ -48,7 +51,9 @@ function NewsletterSignup() {
       </p>
       {status === "success" ? (
         <p className="cNewsletter-success" role="status">
-          You're on the list. Watch your inbox for the next dispatch.
+          {already
+            ? "You're already confirmed — watch your inbox for the next dispatch."
+            : "Almost there — check your inbox and click the confirmation link to finish joining."}
         </p>
       ) : (
         <form className="cNewsletter-form" onSubmit={subscribe}>
