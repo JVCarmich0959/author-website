@@ -166,7 +166,7 @@ export default function Nav() {
         onKeyDown={(e) => handleKeyDown(e, () => goTo("home"))}
         aria-label="Navigate to Home section"
       >
-        Melissa Michaels
+        It's in the blood
       </div>
 
       <button {...menuButtonProps}>
