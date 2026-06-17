@@ -7,7 +7,7 @@ import "./hero.css";
 const sections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "services", label: "Preview" },
+  { id: "services", label: "Excerpt" },
 ];
 
 export default function Nav() {

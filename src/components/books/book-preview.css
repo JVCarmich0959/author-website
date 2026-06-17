@@ -49,12 +49,76 @@
   transform: scale(1.05);
 }
 
-.preview-teaser {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+.preview-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-eyebrow {
   color: var(--antique-gold);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 0.6rem;
+}
+
+.preview-title {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--blood-red);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
+  margin-bottom: 0.85rem;
+}
+
+.preview-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+.preview-tags li {
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--antique-gold);
+  background: rgba(185, 33, 29, 0.18);
+  border: 1px solid rgba(185, 33, 29, 0.45);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.preview-teaser {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #ece6da;
   font-family: "Lora", serif;
+}
+
+.preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.preview-secondary-btn {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 0.95rem;
+  color: var(--antique-gold);
+  border-bottom: 1px solid rgba(205, 180, 139, 0.4);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.preview-secondary-btn:hover {
+  color: var(--blood-red);
+  border-color: var(--blood-red);
 }
 
 .read-more-btn {
@@ -194,16 +258,17 @@
     flex-direction: row;
     align-items: center;
     text-align: left;
-    gap: 3rem;
+    gap: 3.5rem;
+    max-width: 1000px;
   }
 
   .book-model-wrapper {
     margin-bottom: 0;
-    flex: 1;
+    flex: 0 0 320px;
   }
 
-  .preview-text {
-    flex: 2;
+  .preview-description {
+    flex: 1;
   }
 
   .book-preview {

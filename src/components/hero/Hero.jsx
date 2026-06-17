@@ -3,7 +3,6 @@ import React, { Suspense, useCallback, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { motion, useReducedMotion } from "motion/react";
 import Shape from "./Shape";
-import NewsletterModal from "./NewsletterModal";
 import "./hero.css";
 
 const LoadingFallback = () => (
@@ -32,7 +31,12 @@ const ScrollIcon = () => (
 
 export default function Hero({ as: Wrapper = "section", id = "home" }) {
   const prefersReducedMotion = useReducedMotion();
-  
+
+  const scrollToId = useCallback((targetId) => {
+    const el = document.getElementById(targetId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -43,8 +47,6 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
       scrollToTop();
     }
   }, [scrollToTop]);
-
-  const slogan = useMemo(() => ["It's", "in", "the", "blood"], []);
 
   const titleVariants = useMemo(() => ({
     initial: { y: prefersReducedMotion ? 0 : -100, opacity: 0 },
@@ -61,42 +63,6 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
       : { repeat: Infinity, duration: 4, ease: "easeInOut" }
   }), [prefersReducedMotion]);
 
-  const getSloganAnimation = useCallback((word, index) => {
-    const isBlood = word === "blood";
-    
-    if (prefersReducedMotion) {
-      return {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        transition: { delay: index * 0.2, duration: 0.3 }
-      };
-    }
-
-    return {
-      initial: { opacity: 0 },
-      animate: {
-        opacity: 1,
-        scale: isBlood ? [1, 1.2, 1] : 1,
-      },
-      transition: {
-        delay: index * 0.8,
-        duration: 0.6,
-        repeat: isBlood ? 3 : 0,
-        ease: "easeInOut",
-      }
-    };
-  }, [prefersReducedMotion]);
-
-  const getSloganStyle = useCallback((word) => {
-    const isBlood = word === "blood";
-    
-    return {
-      animation: !prefersReducedMotion && isBlood ? "flicker 2s infinite" : "none",
-      textShadow: "0 0 6px rgba(0, 0, 0, 0.8)",
-      color: isBlood ? "var(--blood-red)" : "inherit",
-    };
-  }, [prefersReducedMotion]);
-
   const buttonVariants = useMemo(() => ({
     hover: prefersReducedMotion ? {} : { scale: 1.2 },
     tap: prefersReducedMotion ? {} : { scale: 0.95 }
@@ -111,20 +77,40 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
     <>
       <Wrapper {...wrapperProps}>
         <header className="hSection left">
-          <motion.h1
-            {...titleVariants}
-            className="hTitle"
-          >
-            Melissa Michaels
-            <br />
-            <span className="subtitle"> Urban Fantasy Author </span>
-          </motion.h1>
+          <motion.div className="hero-intro" {...titleVariants}>
+            <p className="hero-eyebrow">Urban Fantasy · The Bloodborne Chronicles</p>
+            <h1 className="hTitle">Melissa Michaels</h1>
+            <p className="hero-subtitle">
+              Where ancient bloodlines meet modern warfare — and the shadows
+              hunt back.
+            </p>
+            <div className="hero-cta">
+              <button
+                type="button"
+                className="hero-btn hero-btn--primary"
+                onClick={() => scrollToId("services")}
+              >
+                Read a Sample
+              </button>
+              <button
+                type="button"
+                className="hero-btn hero-btn--ghost"
+                onClick={() => scrollToId("about")}
+              >
+                Meet Melissa
+              </button>
+            </div>
+          </motion.div>
 
           <motion.a
-            href="#about"
+            href="#services"
             className="scroll"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("services");
+            }}
             {...scrollVariants}
-            aria-label="Scroll to About section"
+            aria-label="Scroll to the book preview"
           >
             <ScrollIcon />
           </motion.a>
@@ -156,19 +142,9 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
             />
           </div>
 
-          <div className="hero-slogan" role="presentation" aria-hidden="true">
-            {slogan.map((word, i) => (
-              <motion.span
-                key={`${word}-${i}`}
-                {...getSloganAnimation(word, i)}
-                style={getSloganStyle(word)}
-              >
-                {word}{" "}
-              </motion.span>
-            ))}
-          </div>
-          
           <p className="sr-only">Tagline: It's in the blood</p>
+
+          <div className="hero-fade" aria-hidden="true" />
         </div>
 
         <motion.button
@@ -197,8 +173,6 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
           </svg>
         </motion.button>
       </Wrapper>
-
-      <NewsletterModal />
     </>
   );
 }

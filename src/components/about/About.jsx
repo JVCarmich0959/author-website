@@ -126,12 +126,13 @@ const SocialIcons = {
  * 
  * @returns {JSX.Element} A motion-enhanced section element displaying the author's details.
  */
-export default function About({ 
+export default function About({
   as: Wrapper = "section",
   id = "about",
-  headshot, 
-  bio = [], 
-  blurb, 
+  headshot,
+  lede,
+  bio = [],
+  blurb,
   socialLinks = {},
   authorName = "Melissa Michaels",
   authorDescription = "author of the Bloodborne Chronicles"
@@ -230,42 +231,60 @@ export default function About({
         />
       </motion.h2>
 
-      {headshot && (
-        <motion.img
-          src={headshot}
-          alt={`${authorName}, ${authorDescription}`}
-          className="headshot"
-          loading="lazy"
-          variants={variants.image}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          onError={handleImageError}
-        />
-      )}
-
-      <div className="aboutContent" role="main">
-        {bioArray.map((text, i) => (
-          <motion.p
-            key={i}
-            custom={i}
-            variants={variants.content}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            dangerouslySetInnerHTML={{ __html: text }}
-          />
-        ))}
-        
-        {blurb && (
-          <motion.p
-            className="aboutBlurb"
-            variants={variants.content}
-            custom={bioArray.length}
+      <div className="aboutBody">
+        {headshot && (
+          <motion.figure
+            className="aboutPhoto"
+            variants={variants.image}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            <em>{blurb}</em>
-          </motion.p>
+            <img
+              src={headshot}
+              alt={`${authorName}, ${authorDescription}`}
+              className="headshot"
+              loading="lazy"
+              onError={handleImageError}
+            />
+          </motion.figure>
         )}
+
+        <div className="aboutContent" role="main">
+          {lede && (
+            <motion.p
+              className="aboutLede"
+              variants={variants.content}
+              custom={0}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+            >
+              {lede}
+            </motion.p>
+          )}
+
+          {bioArray.map((text, i) => (
+            <motion.p
+              key={i}
+              custom={i + 1}
+              variants={variants.content}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
+          ))}
+
+          {blurb && (
+            <motion.p
+              className="aboutBlurb"
+              variants={variants.content}
+              custom={bioArray.length + 1}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+            >
+              <em>{blurb}</em>
+            </motion.p>
+          )}
+        </div>
       </div>
 
       <motion.nav

@@ -1,75 +1,213 @@
-
 .contact {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
 }
 
+.contact-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+}
+
+.contact-eyebrow {
+  color: var(--color-antique-gold);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.contact-heading {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--color-blood-red);
+  margin-bottom: 1rem;
+}
+
+.contact-lead {
+  color: #ece6da;
+  line-height: 1.7;
+}
+
+/* newsletter + message form sit side by side on desktop */
+.contact-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 880px) {
+  .contact-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: start;
+  }
+}
+
+/* shared panel look */
+.cNewsletter,
 .cSection {
-  width: 100%;
-  max-width: 600px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(165deg, var(--color-base-900, #0d1014), var(--color-base-950, #050607));
+  border: 1px solid rgba(205, 180, 139, 0.16);
+  border-radius: 1rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 
+/* --- embedded newsletter card --- */
+.cNewsletter-title {
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-blood-red);
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
 
-form {
-  width: 80%;
+.cNewsletter-copy {
+  color: #d8d2c6;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.cNewsletter-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: rgba(2, 2, 45, 0.066);
-  padding: 50px;
-  border-radius: 50px;
+  gap: 0.75rem;
 }
 
-input,
-textarea {
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
+.cNewsletter-form input {
+  padding: 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(205, 180, 139, 0.25);
+  background: rgba(5, 6, 7, 0.7);
+  color: var(--color-base-100, #f4f1ea);
+}
+.cNewsletter-form input::placeholder {
+  color: rgba(205, 180, 139, 0.5);
+}
+.cNewsletter-form input:focus {
+  outline: none;
+  border-color: var(--color-blood-red);
+  box-shadow: 0 0 16px rgba(185, 33, 29, 0.25);
+}
+
+.cNewsletter-form button {
+  background: linear-gradient(135deg, var(--color-blood-red), #6e0f0c);
+  color: var(--color-antique-gold);
+  border: 1px solid var(--color-antique-gold);
+  padding: 0.85rem;
+  border-radius: 0.5rem;
+  font-family: "Cinzel Decorative", serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cNewsletter-form button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(185, 33, 29, 0.35);
+}
+.cNewsletter-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.cNewsletter-success {
+  color: var(--color-antique-gold);
+  line-height: 1.6;
+}
+.cNewsletter-error {
+  color: #f08a86;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* --- message form --- */
+.cSection form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
 .formItem {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.4rem;
 }
 
-label {
-  font-size: 13px;
+.cSection label {
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-antique-gold);
+}
+
+.cSection input,
+.cSection textarea {
+  padding: 0.85rem;
+  border: 1px solid rgba(205, 180, 139, 0.25);
+  border-radius: 0.5rem;
+  background: rgba(5, 6, 7, 0.7);
+  color: var(--color-base-100, #f4f1ea);
+  font-family: inherit;
+  resize: vertical;
+}
+.cSection input::placeholder,
+.cSection textarea::placeholder {
+  color: rgba(205, 180, 139, 0.5);
+}
+.cSection input:focus,
+.cSection textarea:focus {
+  outline: none;
+  border-color: var(--color-blood-red);
+  box-shadow: 0 0 16px rgba(185, 33, 29, 0.25);
 }
 
 .formButton {
-  background-color: #dd4c62;
-  color: white;
-  padding: 20px;
-  border: none;
-  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-blood-red), #6e0f0c);
+  color: var(--color-antique-gold);
+  border: 1px solid var(--color-antique-gold);
+  padding: 0.95rem;
+  border-radius: 0.5rem;
+  font-family: "Cinzel Decorative", serif;
+  letter-spacing: 0.04em;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.formButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(185, 33, 29, 0.35);
 }
 
-@media (max-width: 1280px) {
-  .form {
-    width: 100%;
-  }
+.contact-error {
+  color: #f08a86;
+  font-size: 0.9rem;
 }
 
-@media (max-width: 1024px) {
-  .contact {
-    gap: 30px;
-  }
+/* success state */
+.contact-success {
+  text-align: center;
+  padding: 1rem;
 }
-
-@media (max-width: 768px) {
-  .contact {
-    flex-direction: column;
-  }
-
-  .cSection {
-    width: 100%;
-  }
+.contact-success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  color: var(--color-antique-gold);
+  background: rgba(185, 33, 29, 0.18);
+  border: 1px solid rgba(185, 33, 29, 0.5);
+}
+.contact-success h3 {
+  font-family: "Cinzel Decorative", serif;
+  color: var(--color-blood-red);
+  margin-bottom: 0.6rem;
+}
+.contact-success p {
+  color: #ece6da;
+  line-height: 1.6;
 }

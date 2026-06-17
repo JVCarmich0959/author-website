@@ -77,20 +77,39 @@ export default function BookPreview({ as: Wrapper = "section", id }) {
           </div>
 
           <div className="preview-description">
+            <p className="preview-eyebrow">Book One · The Bloodborne Chronicles</p>
             <h2 className="preview-title">Raven's Revenge</h2>
+            <ul className="preview-tags" aria-label="Genre">
+              <li>Urban Fantasy</li>
+              <li>Military Thriller</li>
+            </ul>
             <p className="preview-teaser">
               Raven Andros sees the world in heat signatures and flight paths, in the clean{" "}
               geometry of kill zones and extraction points—until the day she sees something{" "}
               that moves too fast to be human...
             </p>
-            <button
-              className="read-more-btn"
-              aria-expanded={showModal}
-              aria-controls="modal-content"
-              onClick={() => setShowModal(true)}
-            >
-              {showModal ? "Close Preview" : "Read Full Preview"}
-            </button>
+            <div className="preview-actions">
+              <button
+                className="read-more-btn"
+                aria-expanded={showModal}
+                aria-controls="modal-content"
+                onClick={() => setShowModal(true)}
+              >
+                {showModal ? "Close Preview" : "Read Full Preview"}
+              </button>
+              <a
+                href="#contact"
+                className="preview-secondary-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+              >
+                Get release news →
+              </a>
+            </div>
           </div>
         </div>
       </Wrapper>

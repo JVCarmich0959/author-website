@@ -38,6 +38,10 @@
 }
 
 .hSection {
+  /* sit above the absolutely-positioned background image (.bg / .hImg) so the
+     author name, subtitle, and call-to-action are actually visible */
+  position: relative;
+  z-index: 3;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -47,16 +51,90 @@
 .hSection.left { align-items: flex-start; }
 .hSection.right { align-items: flex-end; }
 
+/* hero text block: glass scrim keeps it legible over the busy artwork */
+.hero-intro {
+  margin-top: clamp(2rem, 8vh, 6rem);
+  max-width: 34rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(5, 6, 7, 0.72), rgba(5, 6, 7, 0.45));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(205, 180, 139, 0.18);
+}
+
+.hero-eyebrow {
+  color: var(--antique-gold);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
 .hTitle {
-  margin-top: 3rem;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.05;
   color: var(--blood-red);
   text-shadow: 4px 4px 8px rgba(0,0,0,0.8), -2px -2px 4px rgba(27,12,0,0.5);
 }
-.hTitle span {
+
+.hero-subtitle {
+  margin-top: 0.9rem;
   color: var(--antique-gold);
+  font-family: "Inter", "Lora", serif;
   font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  line-height: 1.5;
+  max-width: 30rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.6rem;
+}
+
+.hero-btn {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.hero-btn--primary {
+  background: linear-gradient(135deg, var(--blood-red), #6e0f0c);
+  color: var(--antique-gold);
+  border: 1px solid var(--antique-gold);
+}
+.hero-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(185, 33, 29, 0.4);
+}
+.hero-btn--ghost {
+  background: rgba(5, 6, 7, 0.4);
+  color: var(--antique-gold);
+  border: 1px solid rgba(205, 180, 139, 0.45);
+}
+.hero-btn--ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--antique-gold);
+  box-shadow: 0 0 16px rgba(205, 180, 139, 0.2);
+}
+
+/* blends the hero artwork into the solid section below it */
+.hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(1, 8, 0, 0), var(--color-base-950, #050607));
 }
 
 .awards, .certificate {
@@ -242,12 +320,32 @@
 }
 
 .nav__links li {
+  position: relative;
   cursor: pointer;
   color: var(--antique-gold);
   transition: color 0.2s;
 }
 .nav__links li:hover {
   color: var(--blood-red);
+}
+
+/* active-page / active-section indicator */
+.nav__link--active {
+  color: var(--blood-red);
+}
+.nav__link--active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--blood-red);
+  box-shadow: 0 0 8px rgba(185, 33, 29, 0.6);
+}
+@media (max-width: 768px) {
+  /* underline reads oddly in the stacked mobile menu */
+  .nav__link--active::after { display: none; }
 }
 
 .nav__toggle {

@@ -6,25 +6,63 @@
     var(--color-black),
     var(--color-burgundy)
   );
-  padding: 80px 4%;
+  padding: clamp(3.5rem, 8vw, 6rem) 4%;
   color: var(--color-antique-gold);
-  min-height: 100vh;
 }
 
 .aboutTitle {
   position: relative;
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 5vw, 3rem);
   text-align: center;
-  margin-bottom: 1rem;
-  font-family: "Gothic Serif", serif;
+  margin-bottom: 2.5rem;
+  font-family: "Cinzel Decorative", "Gothic Serif", serif;
   color: var(--color-blood-red);
 }
 
-.aboutContent{
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  line-height: 1.6;
-  font-weight: 300;
+/* photo + bio sit together instead of stacking with a large empty gap */
+.aboutBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.aboutPhoto {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.headshot {
+  display: block;
+  width: clamp(180px, 40vw, 260px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(205, 180, 139, 0.45);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 28px rgba(185, 33, 29, 0.18);
+}
+
+.aboutContent {
+  line-height: 1.75;
+  /* higher-contrast body copy than the thin antique gold (WCAG AA) */
+  color: #ece6da;
+  font-weight: 400;
+}
+
+.aboutContent p {
+  color: inherit;
+  margin-bottom: 1rem;
+}
+
+/* concise, scannable opening line */
+.aboutLede {
+  font-family: "Lora", serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--color-antique-gold);
+  margin-bottom: 1.5rem;
 }
 
 .aboutContent a {
@@ -35,17 +73,25 @@
   color: var(--color-antique-gold);
 }
 
-.headshot {
-  display: block;
-  width: 200px;
-  margin: 0 auto 1rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .aboutBlurb {
   margin-top: 1rem;
   font-style: italic;
+  color: var(--color-antique-gold);
+}
+
+@media (min-width: 860px) {
+  .aboutBody {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3.5rem;
+  }
+  .aboutPhoto {
+    position: sticky;
+    top: 6rem;
+  }
+  .aboutContent {
+    flex: 1;
+  }
 }
 
 .socialLinks {

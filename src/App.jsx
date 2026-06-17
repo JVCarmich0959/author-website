@@ -23,6 +23,7 @@ const App = () => {
       <Suspense fallback={<div className="section-loading">Loading author bio...</div>}>
         <About
           headshot={`${import.meta.env.BASE_URL}aboutme.jpg`}
+          lede="Melissa Michaels writes urban fantasy at the intersection of ancient bloodlines and modern warfare — stories where the supernatural wears tactical gear and family curses run deeper than any chain of command."
           bio={[
             `Some stories find you in the static between frequencies, in the three frames of thermal
             where something moves too fast to be human. Melissa Michaels writes at the intersection
