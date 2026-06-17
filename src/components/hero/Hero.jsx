@@ -1,5 +1,5 @@
 // src/components/hero/Hero.jsx
-import React, { Suspense, useCallback, useMemo } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { motion, useReducedMotion } from "motion/react";
 import Shape from "./Shape";
@@ -31,6 +31,15 @@ const ScrollIcon = () => (
 
 export default function Hero({ as: Wrapper = "section", id = "home" }) {
   const prefersReducedMotion = useReducedMotion();
+  const [showToTop, setShowToTop] = useState(false);
+
+  // the scroll-to-top button only appears once the hero is out of view
+  useEffect(() => {
+    const onScroll = () => setShowToTop(window.scrollY > 500);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToId = useCallback((targetId) => {
     const el = document.getElementById(targetId);
@@ -148,7 +157,7 @@ export default function Hero({ as: Wrapper = "section", id = "home" }) {
         </div>
 
         <motion.button
-          className="to-top"
+          className={`to-top${showToTop ? " to-top--visible" : ""}`}
           onClick={scrollToTop}
           onKeyDown={handleKeyDown}
           variants={buttonVariants}

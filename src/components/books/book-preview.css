@@ -20,7 +20,14 @@
   align-items: center;
   justify-content: center;
   padding: 4rem 1rem;
-  background: var(--bg-gradient);
+  /* start and end on the shared base so the section seams blend; burgundy
+     glow peaks in the middle */
+  background: linear-gradient(
+    180deg,
+    var(--color-base-950) 0%,
+    rgba(27, 12, 0, 0.55) 50%,
+    var(--color-base-950) 100%
+  );
   position: relative;
   z-index: 2;
 }

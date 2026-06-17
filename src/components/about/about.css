@@ -1,10 +1,13 @@
 /* src/components/About/about.css */
 
 .about {
+  /* start and end on the shared base so seams with the neighbouring
+     sections blend instead of forming a hard line */
   background: linear-gradient(
-    to bottom,
-    var(--color-black),
-    var(--color-burgundy)
+    180deg,
+    var(--color-base-950) 0%,
+    rgba(27, 12, 0, 0.45) 50%,
+    var(--color-base-950) 100%
   );
   padding: clamp(3.5rem, 8vw, 6rem) 4%;
   color: var(--color-antique-gold);
