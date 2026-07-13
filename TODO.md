@@ -21,7 +21,7 @@
 - [ ] Audit the bottom "Newsletter" component — it's actually a contact form, rename + adjust copy
 
 ## Social Media Integration
-- [ ] Replace placeholder URLs in `Footer.jsx` (currently point to twitter.com, instagram.com, etc.) with mom's real handles
+- [x] Replace placeholder URLs in `Footer.jsx` with real handles (YouTube, Facebook, Instagram; dropped Twitter/Goodreads — no accounts)
 - [ ] Verify all social icons match theme on hover/focus
 
 ## Performance
