@@ -16,7 +16,7 @@ const SOCIALS = [
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/melssamdc104/",
+    href: "https://www.instagram.com/melissamdc104/",
     Icon: Instagram,
   },
 ];
