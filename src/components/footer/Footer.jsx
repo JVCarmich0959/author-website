@@ -1,30 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Instagram, Twitter, Facebook, BookMarked } from "lucide-react";
+import { Instagram, Facebook, Youtube } from "lucide-react";
 import "./footer.css";
 
-// TODO: replace these with Melissa's real profile URLs.
 const SOCIALS = [
-  { name: "Instagram", href: "https://instagram.com", Icon: Instagram },
-  { name: "Twitter / X", href: "https://twitter.com", Icon: Twitter },
-  { name: "Facebook", href: "https://facebook.com", Icon: Facebook },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@melissamichaelsurbanfanas6965",
+    Icon: Youtube,
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/melissadmichaels/",
+    Icon: Facebook,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/melssamdc104/",
+    Icon: Instagram,
+  },
 ];
-
-const GOODREADS_URL = "https://www.goodreads.com";
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <a
-        className="footer-goodreads"
-        href={GOODREADS_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <BookMarked size={18} aria-hidden="true" />
-        <span>Follow on Goodreads</span>
-      </a>
-
       <nav className="footer-social" aria-label="Social media">
         {SOCIALS.map(({ name, href, Icon }) => (
           <a
