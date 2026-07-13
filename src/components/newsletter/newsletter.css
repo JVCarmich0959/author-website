@@ -52,6 +52,9 @@
   border: 1px solid rgba(205, 180, 139, 0.16);
   border-radius: 1rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
+  /* the form fields slide in from x:+100px; clip that motion inside the panel
+     so it can't widen the page before the animation runs */
+  overflow-x: clip;
 }
 
 /* --- embedded newsletter card --- */

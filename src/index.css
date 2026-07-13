@@ -52,6 +52,10 @@ html {
   background: var(--color-base-950);
   color: var(--color-base-100);
   font-family: var(--font-body);
+  /* body-only overflow-x is ignored by mobile browsers; clip on html too so
+     transformed/offscreen elements can't widen the page and hide the nav */
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* keep anchored sections clear of the fixed header when scrolled to */
@@ -63,6 +67,7 @@ body {
   background: radial-gradient(circle at top, rgba(12, 14, 20, 0.9), var(--color-base-950));
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* anchor tags in antique gold with slight glow */
