@@ -6,7 +6,7 @@ import "./footer.css";
 const SOCIALS = [
   {
     name: "YouTube",
-    href: "https://www.youtube.com/@melissamichaelsurbanfanas6965",
+    href: "https://www.youtube.com/@melissamichaelsurbanfantas6965",
     Icon: Youtube,
   },
   {
