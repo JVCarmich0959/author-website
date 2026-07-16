@@ -1,40 +1,48 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Clock, MessageCircle } from 'lucide-react'
+import { readingMinutes } from '../../lib/readingTime'
+import DispatchThumb from './DispatchThumb'
 
-export default function PostPreview({ post }) {
-  const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
+export default function PostPreview({ post, commentCount }) {
+  const kickerDate = post.date
+    ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
     : null
+  const tag = post.tags?.[0]
 
   return (
-    <article className="blog-card flex flex-col p-6">
-      {post.thumbnail && (
-        <Link to={`/blog/${post.slug}`} className="block mb-4 -mt-2 -mx-2">
-          <img src={post.thumbnail} alt="" className="rounded-lg w-full object-cover max-h-44" />
-        </Link>
-      )}
-      {formattedDate && <p className="blog-meta mb-2">{formattedDate}</p>}
-      <h2 className="text-xl mb-3 leading-snug">
-        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-      </h2>
-      <p className="text-sm opacity-80 mb-4 line-clamp-4">{post.summary}</p>
-      <div className="mt-auto flex items-end justify-between gap-3">
-        <Link to={`/blog/${post.slug}`} className="blog-meta hover:opacity-100">
-          Read the dispatch →
-        </Link>
-        {post.tags?.length > 0 && (
-          <ul className="flex flex-wrap gap-2 justify-end">
-            {post.tags.map((tag) => (
-              <li key={tag} className="blog-chip text-xs px-2 py-1 rounded-full">
-                {tag}
-              </li>
-            ))}
-          </ul>
+    <article className="dispatch-card">
+      <Link
+        to={`/blog/${post.slug}`}
+        className="dispatch-card-media"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        {post.featuredImage ? (
+          <img src={post.featuredImage} alt="" loading="lazy" />
+        ) : (
+          <DispatchThumb slug={post.slug} title={post.title} />
         )}
+      </Link>
+      <div className="dispatch-card-body">
+        <p className="dispatch-card-kicker">{[tag, kickerDate].filter(Boolean).join(' · ')}</p>
+        <h3 className="dispatch-card-title">
+          <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+        </h3>
+        <p className="dispatch-card-excerpt">{post.summary}</p>
+        <div className="dispatch-card-footer">
+          <span>
+            <Clock size={12} aria-hidden="true" />
+            {readingMinutes(post.body)} min
+          </span>
+          {typeof commentCount === 'number' && (
+            <span>
+              <MessageCircle size={12} aria-hidden="true" />
+              {commentCount}
+            </span>
+          )}
+          {tag && <span className="dispatch-card-tag">{tag}</span>}
+        </div>
       </div>
     </article>
   )

@@ -29,6 +29,8 @@
 
   --font-display: "Cinzel Decorative", serif;
   --font-body: "Inter", "Cinzel Decorative", serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-accent: "Cinzel", serif;
 
   /* Legacy palette compatibility */
   --color-black: #010800;
