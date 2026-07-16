@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Clock, MessageCircle } from 'lucide-react';
 import { debounce } from 'lodash';
 import PostPreview from './PostPreview';
+import DispatchThumb from './DispatchThumb';
 import { readingMinutes } from '../../lib/readingTime';
 import SEO from '../utility/SEO';
 import { supabase, mapPost } from '../../lib/supabase';
@@ -89,7 +90,7 @@ function FeaturedDispatch({ post, commentCount }) {
           {post.featuredImage ? (
             <img src={post.featuredImage} alt="" />
           ) : (
-            <div className="dispatch-media-placeholder">Featured image</div>
+            <DispatchThumb slug={post.slug} title={post.title} />
           )}
           <span className="dispatch-featured-badge">Latest dispatch</span>
           <div className="dispatch-featured-bar" aria-hidden="true">

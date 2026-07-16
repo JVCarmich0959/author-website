@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Clock, MessageCircle } from 'lucide-react'
 import { readingMinutes } from '../../lib/readingTime'
+import DispatchThumb from './DispatchThumb'
 
 export default function PostPreview({ post, commentCount }) {
   const kickerDate = post.date
@@ -20,7 +21,7 @@ export default function PostPreview({ post, commentCount }) {
         {post.featuredImage ? (
           <img src={post.featuredImage} alt="" loading="lazy" />
         ) : (
-          <div className="dispatch-media-placeholder">Thumbnail</div>
+          <DispatchThumb slug={post.slug} title={post.title} />
         )}
       </Link>
       <div className="dispatch-card-body">
